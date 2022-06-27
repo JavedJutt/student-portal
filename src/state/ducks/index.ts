@@ -4,7 +4,7 @@ import { all, fork } from "redux-saga/effects";
 import studentSaga from "./student/saga";
 
 export const rootReducer = combineReducers({
-  studentReducer,
+  student: studentReducer,
 });
 
 export function* rootSaga() {
