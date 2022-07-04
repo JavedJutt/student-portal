@@ -6,6 +6,5 @@ export const userSlice = createSlice({
   reducers: {
   },
 });
-export const { add, del } = userSlice.actions;
 
 export default userSlice.reducer;
