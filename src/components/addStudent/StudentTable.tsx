@@ -9,6 +9,7 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
 import React from "react";
+import moment from "moment";
 
 function StudentTable() {
   function studentRecord(
@@ -20,7 +21,8 @@ function StudentTable() {
   ) {
     return { name, marks, subject, grade, date };
   }
-  const cur = new Date().toLocaleString();
+  // const cur = new Date().toLocaleString();
+  const cur = moment().format("MMM D, YYYY [at] hh.mm A");
   const rows = [
     studentRecord("Ali", 80, "English", "A-", cur),
     studentRecord("Ahmad", 70, "Arabic", "B+", cur),
