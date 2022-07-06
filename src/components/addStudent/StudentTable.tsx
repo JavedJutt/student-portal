@@ -21,7 +21,6 @@ function StudentTable() {
   ) {
     return { name, marks, subject, grade, date };
   }
-  // const cur = new Date().toLocaleString();
   const cur = moment().format("MMM D, YYYY [at] hh.mm A");
   const rows = [
     studentRecord("Ali", 80, "English", "A-", cur),
