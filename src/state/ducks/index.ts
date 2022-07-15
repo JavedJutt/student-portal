@@ -8,5 +8,6 @@ export const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
+  console.log(" before running root saga");
   yield all([fork(studentSaga)]);
 }

@@ -8,56 +8,55 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
-import React from "react";
-import moment from "moment";
+import React, { useEffect } from "react";
 
-function StudentTable() {
-  function studentRecord(
-    name: string,
-    marks: number,
-    subject: string,
-    grade: string,
-    date: string
-  ) {
-    return { name, marks, subject, grade, date };
-  }
-  const cur = moment().format("MMM D, YYYY [at] hh.mm A");
-  const rows = [
-    studentRecord("Ali", 80, "English", "A-", cur),
-    studentRecord("Ahmad", 70, "Arabic", "B+", cur),
-    studentRecord("Ahmad", 80, "computer", "A-", cur),
-  ];
+function StudentTable({ fetchStudents, data }: any) {
+  useEffect(() => {
+    fetchStudents();
+  }, [fetchStudents]);
+
+  const student = {
+    date: new Date(),
+  };
+
+  console.log(JSON.stringify(student));
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell> Name</TableCell>
-            <TableCell> Marks</TableCell>
-            <TableCell> Subject</TableCell>
-            <TableCell> Grade</TableCell>
-            <TableCell> Date</TableCell>
-            <TableCell> Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((rows) => (
-            <TableRow>
-              <TableCell>{rows.name} </TableCell>
-              <TableCell>{rows.marks} </TableCell>
-              <TableCell>{rows.subject} </TableCell>
-              <TableCell>{rows.grade} </TableCell>
-              <TableCell>{rows.date} </TableCell>
-              <TableCell>
-                <MoreVertIcon></MoreVertIcon>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      {data.length > 0 ? (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell> Name</TableCell>
+                <TableCell> Marks</TableCell>
+                <TableCell> Subject</TableCell>
+                <TableCell> Grade</TableCell>
+                <TableCell> Date</TableCell>
+                <TableCell> Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((data: any) => (
+                <TableRow key={data._id}>
+                  <TableCell>{data.name} </TableCell>
+                  <TableCell>{data.marks} </TableCell>
+                  <TableCell>{data.subject} </TableCell>
+                  <TableCell>{data.grade} </TableCell>
+                  <TableCell>{data.time} </TableCell>
+                  <TableCell>
+                    <MoreVertIcon></MoreVertIcon>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <> </>
+      )}
+    </div>
   );
 }
 
-export default StudentTable;
+export default React.memo(StudentTable);
