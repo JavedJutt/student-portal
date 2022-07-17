@@ -18,6 +18,18 @@ function StudentTable({ fetchStudents, data }: any) {
   const student = {
     date: new Date(),
   };
+  const colors = [
+    { grade: "A+", color: "#686563" },
+    { grade: "B+", color: "#FFF7F5" },
+    { grade: "F", color: "#FF6897" },
+  ];
+
+  const getColor = (grade: any) => {
+    let x = colors.filter((color) => {
+      return color.grade === grade;
+    });
+    return x[0].color;
+  };
 
   console.log(JSON.stringify(student));
 
@@ -42,7 +54,9 @@ function StudentTable({ fetchStudents, data }: any) {
                   <TableCell>{data.name} </TableCell>
                   <TableCell>{data.marks} </TableCell>
                   <TableCell>{data.subject} </TableCell>
-                  <TableCell>{data.grade} </TableCell>
+                  <TableCell sx={{ bgcolor: getColor(data.grade) }}>
+                    {data.grade}
+                  </TableCell>
                   <TableCell>{data.time} </TableCell>
                   <TableCell>
                     <MoreVertIcon></MoreVertIcon>

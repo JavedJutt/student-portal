@@ -7,7 +7,7 @@ function* handleFetch(action: any): any {
   console.log("handle fetch run");
   try {
     const res = yield call(apiCaller, action.meta.method, action.meta.route);
-    console.log("res=> ", res);
+    console.log("Api data ==> ", res);
     yield put(FETCH_STUDENTS_SUCCESS(res));
   } catch {}
 }
