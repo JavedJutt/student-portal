@@ -16,8 +16,8 @@ import {
   IStudentRaw,
   IStudentState,
 } from "../state/ducks/student/types";
-import specificDate from "../helpers/dateHelper";
-import colors from "../helpers/colorHelper";
+import { specificDate } from "../helpers";
+import { colors } from "../helpers/data";
 
 type AllProps = IDispatchToProps & IStudentState;
 function StudentTable({ fetchStudents, data }: AllProps) {
