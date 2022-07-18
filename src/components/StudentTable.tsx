@@ -9,29 +9,28 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
 import React, { useEffect } from "react";
-
-function StudentTable({ fetchStudents, data }: any) {
+import {
+  IDispatchToProps,
+  IStudentRaw,
+  IStudentState,
+} from "../state/ducks/student/types";
+import moment from "moment";
+type AllProps = IDispatchToProps & IStudentState;
+function StudentTable({ fetchStudents, data }: AllProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
 
-  const student = {
-    date: new Date(),
-  };
-  const colors = [
-    { grade: "A+", color: "#686563" },
-    { grade: "B+", color: "#FFF7F5" },
-    { grade: "F", color: "#FF6897" },
-  ];
+  const specificDate = (time: string) =>
+    moment(time).format("MMM D, YYYY [at] hh.mm A");
 
-  const getColor = (grade: any) => {
-    let x = colors.filter((color) => {
-      return color.grade === grade;
-    });
-    return x[0].color;
+  const colors: Record<string, string> = {
+    "A+": "#686563",
+    "A-": "#686563",
+    "B+": "#FFF7F5",
+    "B-": "#FFF7F5",
+    F: "#FF6897",
   };
-
-  console.log(JSON.stringify(student));
 
   return (
     <div>
@@ -49,15 +48,15 @@ function StudentTable({ fetchStudents, data }: any) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((data: any) => (
+              {data.map((data: IStudentRaw) => (
                 <TableRow key={data._id}>
                   <TableCell>{data.name} </TableCell>
                   <TableCell>{data.marks} </TableCell>
                   <TableCell>{data.subject} </TableCell>
-                  <TableCell sx={{ bgcolor: getColor(data.grade) }}>
+                  <TableCell sx={{ bgcolor: colors[data.grade] }}>
                     {data.grade}
                   </TableCell>
-                  <TableCell>{data.time} </TableCell>
+                  <TableCell>{specificDate(data.time)} </TableCell>
                   <TableCell>
                     <MoreVertIcon></MoreVertIcon>
                   </TableCell>

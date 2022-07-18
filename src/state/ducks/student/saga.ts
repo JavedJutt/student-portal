@@ -1,12 +1,16 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import apiCaller from "../../utils/apiCaller";
 import { FETCH_STUDENTS_SUCCESS } from "./reducer";
-import { StudentActionTypes } from "./types";
+import { IStudentRaw, StudentActionTypes } from "./types";
 
-function* handleFetch(action: any): any {
+function* handleFetch(action: any): Generator {
   console.log("handle fetch run");
   try {
-    const res = yield call(apiCaller, action.meta.method, action.meta.route);
+    const res: IStudentRaw[] | any = yield call(
+      apiCaller,
+      action.meta.method,
+      action.meta.route
+    );
     console.log("Api data ==> ", res);
     yield put(FETCH_STUDENTS_SUCCESS(res));
   } catch {}

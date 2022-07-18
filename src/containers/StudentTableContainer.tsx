@@ -1,13 +1,17 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import StudentTable from "../components/addStudent/StudentTable";
+import StudentTable from "../components/StudentTable";
+import { IApplicationState } from "../state/ducks";
 import { fetchStudents } from "../state/ducks/student/actions";
+import { IStudentState } from "../state/ducks/student/types";
 
 const StudentTableContainer = () => {
   const dispatch = useDispatch();
-  const stateToProps: any = useSelector(({ student }: any) => ({
-    data: student.data,
-  }));
+  const stateToProps: IStudentState = useSelector(
+    ({ student }: IApplicationState) => ({
+      data: student.data,
+    })
+  );
 
   const dispatchToProps = {
     fetchStudents: useCallback(() => dispatch(fetchStudents()), [dispatch]),

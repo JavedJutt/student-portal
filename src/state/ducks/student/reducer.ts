@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IStudentRaw } from "./types";
 export const userSlice = createSlice({
   name: "student",
   initialState: {
@@ -9,7 +10,7 @@ export const userSlice = createSlice({
         marks: 100,
         subject: "Math",
         grade: "A+",
-        time: "Jul 15, 2022 at 07.58 PM",
+        time: "2022-07-18T08:07:28.3Z",
       },
       {
         _id: 2,
@@ -17,7 +18,7 @@ export const userSlice = createSlice({
         marks: 80,
         subject: "English",
         grade: "B+",
-        time: "Jul 15, 2022 at 07.58 PM",
+        time: "2022-07-18T08:07:28.3Z",
       },
       {
         _id: 3,
@@ -25,19 +26,19 @@ export const userSlice = createSlice({
         marks: 40,
         subject: "English",
         grade: "F",
-        time: "Jul 15, 2022 at 07.58 PM",
+        time: "2022-07-18T08:07:28.3Z",
       },
     ],
-    loading: false,
   },
 
   reducers: {
-    FETCH_STUDENTS: (state) => {
-      console.log("fetch student run");
-      return { ...state, loading: true };
-    },
-    FETCH_STUDENTS_SUCCESS: (state, { payload }: any) => {
-      state.data = payload.concat(state.data);
+    FETCH_STUDENTS_SUCCESS: (
+      state,
+      { payload }: { payload: IStudentRaw[] | any }
+    ) => {
+      // let x = { payload };
+      // console.log("5. {payload} ", x);
+      state.data = state.data.concat(payload);
     },
   },
 });
