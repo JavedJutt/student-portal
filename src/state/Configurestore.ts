@@ -3,6 +3,7 @@ import { rootReducer, rootSaga } from "./ducks/index";
 import sagaMiddleware from "./middelware/saga";
 
 const middleware = [sagaMiddleware];
+
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
