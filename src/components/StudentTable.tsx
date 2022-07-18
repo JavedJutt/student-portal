@@ -16,23 +16,14 @@ import {
   IStudentRaw,
   IStudentState,
 } from "../state/ducks/student/types";
-import moment from "moment";
+import specificDate from "../helpers/dateHelper";
+import colors from "../helpers/colorHelper";
+
 type AllProps = IDispatchToProps & IStudentState;
 function StudentTable({ fetchStudents, data }: AllProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-
-  const specificDate = (time: string) =>
-    moment(time).format("MMM D, YYYY [at] hh.mm A");
-
-  const colors: Record<string, string> = {
-    "A+": "#686563",
-    "A-": "#686563",
-    "B+": "#FFF7F5",
-    "B-": "#FFF7F5",
-    F: "#FF6897",
-  };
 
   return (
     <div>
@@ -44,9 +35,7 @@ function StudentTable({ fetchStudents, data }: AllProps) {
           + Add Data
         </Button>
       </Grid>
-      {/* <Button  sx={{ display: "flex", align: "right" }}>
-        Outlined
-      </Button> */}
+
       {data.length > 0 ? (
         <TableContainer component={Paper}>
           <Table>

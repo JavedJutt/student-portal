@@ -32,13 +32,13 @@ export const userSlice = createSlice({
   },
 
   reducers: {
-    FETCH_STUDENTS_SUCCESS: (
+    FetchStudentsSuccess: (
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      state.data = state.data.concat(payload);
+      state.data = [...state.data, ...payload];
     },
   },
 });
-export const { FETCH_STUDENTS_SUCCESS } = userSlice.actions;
+export const { FetchStudentsSuccess } = userSlice.actions;
 export default userSlice.reducer;

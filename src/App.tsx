@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import store from "./state/Configurestore";
 import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
-import { useEffect } from "react";
 
 function App() {
   return (
