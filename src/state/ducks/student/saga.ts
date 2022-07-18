@@ -1,6 +1,6 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import apiCaller from "../../utils/apiCaller";
-import { FetchStudentsSuccess } from "./reducer";
+import { fetchStudentsSuccess } from "./reducer";
 import { IStudentRaw, StudentActionTypes } from "./types";
 
 function* handleFetch(action: any): Generator {
@@ -11,7 +11,7 @@ function* handleFetch(action: any): Generator {
       action.meta.route
     );
 
-    yield put(FetchStudentsSuccess(res));
+    yield put(fetchStudentsSuccess(res));
   } catch {}
 }
 

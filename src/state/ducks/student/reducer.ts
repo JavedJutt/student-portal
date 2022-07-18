@@ -32,7 +32,7 @@ export const userSlice = createSlice({
   },
 
   reducers: {
-    FetchStudentsSuccess: (
+    fetchStudentsSuccess: (
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
@@ -40,5 +40,5 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { FetchStudentsSuccess } = userSlice.actions;
+export const { fetchStudentsSuccess } = userSlice.actions;
 export default userSlice.reducer;
