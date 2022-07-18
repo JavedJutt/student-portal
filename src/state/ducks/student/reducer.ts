@@ -36,8 +36,6 @@ export const userSlice = createSlice({
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      // let x = { payload };
-      // console.log("5. {payload} ", x);
       state.data = state.data.concat(payload);
     },
   },

@@ -12,6 +12,5 @@ export const rootReducer = combineReducers<IApplicationState>({
 });
 
 export function* rootSaga() {
-  console.log(" before running root saga");
   yield all([fork(studentSaga)]);
 }

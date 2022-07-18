@@ -1,4 +1,6 @@
 import {
+  Button,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -34,6 +36,17 @@ function StudentTable({ fetchStudents, data }: AllProps) {
 
   return (
     <div>
+      <Grid container justifyContent="flex-end">
+        <Button
+          variant="outlined"
+          sx={{ color: "#343744", mr: "100px", my: "20px" }}
+        >
+          + Add Data
+        </Button>
+      </Grid>
+      {/* <Button  sx={{ display: "flex", align: "right" }}>
+        Outlined
+      </Button> */}
       {data.length > 0 ? (
         <TableContainer component={Paper}>
           <Table>

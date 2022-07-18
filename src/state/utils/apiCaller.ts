@@ -3,7 +3,6 @@ export default function apiCaller<T>(
   path: string,
   data?: any
 ): Promise<T | null> {
-  console.log("api caller run", process.env.REACT_APP_CRUD_CRUD);
   return fetch(process.env.REACT_APP_CRUD_CRUD + path, {
     method,
     headers: {

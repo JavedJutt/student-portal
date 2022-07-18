@@ -7,12 +7,6 @@ import "./App.css";
 import { useEffect } from "react";
 
 function App() {
-  useEffect(() => {
-    return () => {
-      console.log("Unmount called App");
-    };
-  }, []);
-
   return (
     <React.StrictMode>
       <Provider store={store}>
