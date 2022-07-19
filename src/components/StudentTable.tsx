@@ -18,12 +18,16 @@ import {
 } from "../state/ducks/student/types";
 import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
+import { useNavigate } from "react-router-dom";
 
 type AllProps = IDispatchToProps & IStudentState;
+
 function StudentTable({ fetchStudents, data }: AllProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
+
+  let navigate = useNavigate();
 
   return (
     <div>
@@ -31,6 +35,9 @@ function StudentTable({ fetchStudents, data }: AllProps) {
         <Button
           variant="outlined"
           sx={{ color: "#343744", mr: "100px", my: "20px" }}
+          onClick={() => {
+            navigate("/students");
+          }}
         >
           + Add Data
         </Button>
