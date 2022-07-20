@@ -6,15 +6,17 @@ import InputField from "./InputField";
 import { subjects, grades } from "../helpers/data";
 import { number, object, string } from "yup";
 
+const addStudentSchema = object({
+  name: string().required("name is required"),
+  marks: number()
+    .typeError("Marks are required")
+    .min(0, "Marks cannot be less than 0")
+    .max(100, "Marks cannot be greater than 100"),
+  subject: string().required("subject must be required").oneOf(subjects),
+  grade: string().required("must be required").oneOf(grades),
+});
+
 function AddStudent() {
-  const addStudentSchema = object({
-    name: string().required("name is required"),
-    marks: number()
-      .required("marks are required")
-      .typeError("must be a number"),
-    subject: string().required("subject must be required").oneOf(subjects),
-    grade: string().required("must be required").oneOf(grades),
-  });
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(addStudentSchema),
 
@@ -40,33 +42,29 @@ function AddStudent() {
         <Controller
           name="name"
           control={control}
-          render={({ field, formState }) => {
-            console.log("name ", formState);
-            return (
-              <InputField
-                label="Name"
-                error={formState.errors.name?.message}
-                placeholder="Enter name"
-                {...field}
-              />
-            );
-          }}
+          render={({ field, formState }) => (
+            <InputField
+              label="Name"
+              type="text"
+              error={formState.errors.name?.message}
+              placeholder="Enter name"
+              {...field}
+            />
+          )}
         />
 
         <Controller
           name="marks"
           control={control}
-          render={({ field, formState }) => {
-            console.log("marks ", formState);
-            return (
-              <InputField
-                label="Marks"
-                error={formState.errors.marks?.message}
-                placeholder="Enter marks"
-                {...field}
-              />
-            );
-          }}
+          render={({ field, formState }) => (
+            <InputField
+              label="Marks"
+              type="number"
+              error={formState.errors.marks?.message}
+              placeholder="Enter marks"
+              {...field}
+            />
+          )}
         />
 
         <Controller

@@ -1,4 +1,4 @@
-import { MenuItem, Select } from "@mui/material";
+import { Box, MenuItem, Select } from "@mui/material";
 import React from "react";
 interface Iprops {
   label: string;
@@ -6,7 +6,6 @@ interface Iprops {
   error: string | undefined;
 }
 function Dropdown({ label, dropdownData, error, ...rest }: Iprops) {
-  // console.log(dropdownData);
   return (
     <>
       <label> {label}</label>
@@ -18,7 +17,11 @@ function Dropdown({ label, dropdownData, error, ...rest }: Iprops) {
           </MenuItem>
         ))}
       </Select>
-      {error && <p> {error}</p>}
+      {error && (
+        <Box component="div" color="#d32f2f" sx={{ mb: 1, display: "block" }}>
+          {error}
+        </Box>
+      )}
     </>
   );
 }
