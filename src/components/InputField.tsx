@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 interface IProps {
   placeholder: string;
@@ -8,8 +8,6 @@ interface IProps {
 }
 
 function InputField({ label, type, error, ...rest }: IProps) {
-  // console.log("rest ==>", rest);
-
   return (
     <>
       <label> {label} </label>
@@ -20,7 +18,11 @@ function InputField({ label, type, error, ...rest }: IProps) {
         fullWidth
         {...rest}
       />
-      {error && <p> {error}</p>}
+      {error && (
+        <Box component="div" color="#d32f2f" sx={{ mb: 1, display: "block" }}>
+          {error}
+        </Box>
+      )}
     </>
   );
 }
