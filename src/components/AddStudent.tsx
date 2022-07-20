@@ -1,12 +1,23 @@
 import { Button, Container, Grid } from "@mui/material";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Dropdown from "./Dropdown";
 import InputField from "./InputField";
 import { subjects, grades } from "../helpers/data";
+import { number, object, string } from "yup";
 
 function AddStudent() {
-  const { register, handleSubmit, control } = useForm({
+  const addStudentSchema = object({
+    name: string().required("name is required"),
+    marks: number()
+      .required("marks are required")
+      .typeError("must be a number"),
+    subject: string().required("subject must be required").oneOf(subjects),
+    grade: string().required("must be required").oneOf(grades),
+  });
+  const { handleSubmit, control } = useForm({
+    resolver: yupResolver(addStudentSchema),
+
     defaultValues: {
       name: "",
       marks: 0,
@@ -18,14 +29,9 @@ function AddStudent() {
   const onSubmit = (data: any) => {
     let date = new Date();
     let time = date.toISOString();
-    console.log(data);
     data.time = time;
-    console.log(data);
+    // console.log(data);
   };
-
-  const gradeField = register("grade");
-  console.log(gradeField);
-
   return (
     <Container maxWidth="xs">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,32 +40,58 @@ function AddStudent() {
         <Controller
           name="name"
           control={control}
-          render={({ field }) => (
-            <InputField label="Name" placeholder="Enter name" {...field} />
-          )}
+          render={({ field, formState }) => {
+            console.log("name ", formState);
+            return (
+              <InputField
+                label="Name"
+                error={formState.errors.name?.message}
+                placeholder="Enter name"
+                {...field}
+              />
+            );
+          }}
         />
 
         <Controller
           name="marks"
           control={control}
-          render={({ field }) => (
-            <InputField label="Marks" placeholder="Enter marks" {...field} />
-          )}
+          render={({ field, formState }) => {
+            console.log("marks ", formState);
+            return (
+              <InputField
+                label="Marks"
+                error={formState.errors.marks?.message}
+                placeholder="Enter marks"
+                {...field}
+              />
+            );
+          }}
         />
 
         <Controller
           control={control}
           name="subject"
-          render={({ field }) => (
-            <Dropdown label="Subject" dropdownData={subjects} {...field} />
+          render={({ field, formState }) => (
+            <Dropdown
+              label="Subject"
+              error={formState.errors.subject?.message}
+              dropdownData={subjects}
+              {...field}
+            />
           )}
         />
 
         <Controller
           control={control}
           name="grade"
-          render={({ field }) => (
-            <Dropdown label="Grads" dropdownData={grades} {...field} />
+          render={({ field, formState }) => (
+            <Dropdown
+              label="Grads"
+              error={formState.errors.grade?.message}
+              dropdownData={grades}
+              {...field}
+            />
           )}
         />
 
