@@ -5,6 +5,7 @@ import Dropdown from "./Dropdown";
 import InputField from "./InputField";
 import { subjects, grades } from "../helpers/data";
 import { number, object, string } from "yup";
+import { useNavigate } from "react-router-dom";
 
 const addStudentSchema = object({
   name: string().required("name is required"),
@@ -17,6 +18,8 @@ const addStudentSchema = object({
 });
 
 function AddStudent() {
+  const navigate = useNavigate();
+
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(addStudentSchema),
 
@@ -28,11 +31,15 @@ function AddStudent() {
       time: "",
     },
   });
+
   const onSubmit = (data: any) => {
     let date = new Date();
     let time = date.toISOString();
     data.time = time;
-    // console.log(data);
+  };
+  const handleCancleClick = () => {
+    console.log("cancel clicked");
+    navigate("/");
   };
   return (
     <Container maxWidth="xs">
@@ -99,7 +106,15 @@ function AddStudent() {
           sx={{ my: 3 }}
           alignItems="center"
         >
-          <Button variant="outlined"> cancel</Button>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleCancleClick();
+            }}
+          >
+            {" "}
+            cancel
+          </Button>
           <Button variant="outlined" type="submit">
             save
           </Button>

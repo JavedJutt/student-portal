@@ -5,7 +5,7 @@ import store from "./state/Configurestore";
 import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddStudent from "./components/AddStudent";
+import AddStudentContainer from "./containers/AddSudentContainer";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<StudentTableContainer />} />
-            <Route path="/students" element={<AddStudent />} />
+            <Route path="/students" element={<AddStudentContainer />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -7,3 +7,10 @@ export const fetchStudents = () => {
     route: "/students",
   });
 };
+
+export const addStudent = () => {
+  return action(StudentActionTypes.ADD_STUDENT, [], {
+    method: "get",
+    route: "/students",
+  });
+};
