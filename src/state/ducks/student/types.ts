@@ -26,6 +26,8 @@ export interface IAddStudentRaw {
 export const StudentActionTypes = {
   FETCH_STUDENTS: "@@students/FETCH_STUDENTS",
   ADD_STUDENT: "@@students/ADD_STUDENT",
+  EDIT_STUDENT: "@@students/EDIT_STUDENT",
+  DELETE_STUDENT: "@@students/DELETE_STUDENT",
 };
 
 export interface IMeta {

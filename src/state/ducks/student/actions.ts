@@ -20,7 +20,7 @@ export const addStudent = (data: IAddStudentRaw) => {
 };
 export const EditStudent = (data: IAddStudentRaw) => {
   return action(
-    StudentActionTypes.ADD_STUDENT,
+    StudentActionTypes.EDIT_STUDENT,
     { data },
     {
       method: "put",
@@ -30,7 +30,7 @@ export const EditStudent = (data: IAddStudentRaw) => {
 };
 export const DeleteStudent = (data: IAddStudentRaw) => {
   return action(
-    StudentActionTypes.ADD_STUDENT,
+    StudentActionTypes.DELETE_STUDENT,
     { data },
     {
       method: "delete",
