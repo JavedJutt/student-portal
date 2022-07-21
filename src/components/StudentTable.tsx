@@ -1,6 +1,8 @@
 import {
   Button,
   Grid,
+  Menu,
+  MenuItem,
   Table,
   TableBody,
   TableCell,
@@ -26,6 +28,15 @@ function StudentTable({ fetchStudents, data }: AllProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div>
@@ -65,7 +76,34 @@ function StudentTable({ fetchStudents, data }: AllProps) {
                   </TableCell>
                   <TableCell>{specificDate(data.time)} </TableCell>
                   <TableCell>
-                    <MoreVertIcon></MoreVertIcon>
+                    <Button
+                      id="demo-positioned-button"
+                      aria-controls={open ? "demo-positioned-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleClick}
+                    >
+                      <MoreVertIcon />
+                    </Button>
+
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}> Edit</MenuItem>
+                      <MenuItem onClick={handleClose}> Delete</MenuItem>
+                    </Menu>
                   </TableCell>
                 </TableRow>
               ))}
