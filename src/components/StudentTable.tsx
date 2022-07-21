@@ -37,6 +37,15 @@ function StudentTable({ fetchStudents, data }: AllProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleCloseEdit = (data: IStudentRaw | any) => {
+    setAnchorEl(null);
+    navigate("/students");
+  };
+  const handleCloseDelete = (id: number | any) => {
+    setAnchorEl(null);
+    console.log("data on click", id);
+    navigate("/");
+  };
 
   return (
     <div>
@@ -101,8 +110,14 @@ function StudentTable({ fetchStudents, data }: AllProps) {
                         horizontal: "left",
                       }}
                     >
-                      <MenuItem onClick={handleClose}> Edit</MenuItem>
-                      <MenuItem onClick={handleClose}> Delete</MenuItem>
+                      <MenuItem onClick={(data) => handleCloseEdit(data)}>
+                        {" "}
+                        Edit
+                      </MenuItem>
+                      <MenuItem onClick={(data) => handleCloseDelete(data)}>
+                        {" "}
+                        Delete
+                      </MenuItem>
                     </Menu>
                   </TableCell>
                 </TableRow>

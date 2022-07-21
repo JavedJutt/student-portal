@@ -15,6 +15,7 @@ export interface IStudentRaw extends ApiResponse {
 }
 
 export interface IAddStudentRaw {
+  _id?: number;
   name: string;
   marks: number;
   subject: string;

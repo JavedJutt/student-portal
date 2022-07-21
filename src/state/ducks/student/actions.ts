@@ -18,3 +18,23 @@ export const addStudent = (data: IAddStudentRaw) => {
     }
   );
 };
+export const EditStudent = (data: IAddStudentRaw) => {
+  return action(
+    StudentActionTypes.ADD_STUDENT,
+    { data },
+    {
+      method: "put",
+      route: "/students" + data._id,
+    }
+  );
+};
+export const DeleteStudent = (data: IAddStudentRaw) => {
+  return action(
+    StudentActionTypes.ADD_STUDENT,
+    { data },
+    {
+      method: "delete",
+      route: "/students" + data._id,
+    }
+  );
+};
