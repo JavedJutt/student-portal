@@ -18,7 +18,7 @@ import {
 } from "../state/ducks/student/types";
 import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
-import { useNavigate } from "react-router-dom";
+import { navigate } from "../helpers/history";
 
 type AllProps = IDispatchToProps & IStudentState;
 
@@ -26,8 +26,6 @@ function StudentTable({ fetchStudents, data }: AllProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-
-  let navigate = useNavigate();
 
   return (
     <div>
