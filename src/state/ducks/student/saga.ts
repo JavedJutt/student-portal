@@ -30,10 +30,39 @@ function* handleAdd(action: any): Generator {
     console.log("came in catch");
   }
 }
+function* handleEdit(action: any): Generator {
+  try {
+    const res: IStudentRaw[] | any = yield call(
+      apiCaller,
+      action.meta.method,
+      action.meta.route,
+      action.payload.data
+    );
+    console.log("1.", res);
+    navigate("/");
+  } catch {
+    console.log("came in catch");
+  }
+}
+function* handleDelete(action: any): Generator {
+  try {
+    const res: IStudentRaw[] | any = yield call(
+      apiCaller,
+      action.meta.method,
+      action.meta.route,
+      action.payload.data
+    );
+    console.log("1.", res);
+  } catch {
+    console.log("came in catch");
+  }
+}
 
 function* watchFetchRequest(): Generator {
   yield takeEvery(StudentActionTypes.FETCH_STUDENTS, handleFetch);
   yield takeEvery(StudentActionTypes.ADD_STUDENT, handleAdd);
+  yield takeEvery(StudentActionTypes.EDIT_STUDENT, handleEdit);
+  yield takeEvery(StudentActionTypes.DELETE_STUDENT, handleDelete);
 }
 
 export default function* studentSaga() {

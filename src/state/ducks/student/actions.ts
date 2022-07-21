@@ -24,7 +24,7 @@ export const EditStudent = (data: IAddStudentRaw) => {
     { data },
     {
       method: "put",
-      route: "/students" + data._id,
+      route: "/students/" + data._id,
     }
   );
 };
@@ -34,7 +34,7 @@ export const DeleteStudent = (data: IAddStudentRaw) => {
     { data },
     {
       method: "delete",
-      route: "/students" + data._id,
+      route: "/students/" + data._id,
     }
   );
 };
