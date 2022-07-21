@@ -6,12 +6,14 @@ import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddStudentContainer from "./containers/AddSudentContainer";
+import RoutingHandler from "./helpers/history";
 
 function App() {
   return (
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
+          <RoutingHandler />
           <Routes>
             <Route path="/" element={<StudentTableContainer />} />
             <Route path="/students" element={<AddStudentContainer />} />

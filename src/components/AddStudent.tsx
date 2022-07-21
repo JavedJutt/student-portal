@@ -3,9 +3,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import Dropdown from "./Dropdown";
 import InputField from "./InputField";
-import { subjects, grades } from "../helpers/data";
 import { number, object, string } from "yup";
-import { useNavigate } from "react-router-dom";
+import { grades, subjects } from "../helpers/data";
+import { IAddStudentRaw } from "../state/ducks/student/types";
+import { useCallback } from "react";
+import { navigate } from "../helpers/history";
 
 const addStudentSchema = object({
   name: string().required("name is required"),
@@ -13,18 +15,22 @@ const addStudentSchema = object({
     .typeError("Marks are required")
     .min(0, "Marks cannot be less than 0")
     .max(100, "Marks cannot be greater than 100"),
-  subject: string().required("subject must be required").oneOf(subjects),
-  grade: string().required("must be required").oneOf(grades),
+  subject: string().required("subject must be required"),
+  grade: string().required("must be required"),
 });
 
-function AddStudent() {
-  const navigate = useNavigate();
+interface IProps {
+  addStudent: (data: IAddStudentRaw) => void;
+}
+
+function AddStudent({ addStudent }: IProps) {
+  // const navigate = useNavigate();
 
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(addStudentSchema),
 
     defaultValues: {
-      name: "",
+      name: "hgb",
       marks: 0,
       subject: "Math",
       grade: "F",
@@ -32,11 +38,14 @@ function AddStudent() {
     },
   });
 
-  const onSubmit = (data: any) => {
-    let date = new Date();
-    let time = date.toISOString();
-    data.time = time;
-  };
+  const onSubmit = useCallback(
+    (data: IAddStudentRaw) => {
+      data.time = new Date();
+      addStudent(data);
+    },
+    [addStudent]
+  );
+
   const handleCancleClick = () => {
     console.log("cancel clicked");
     navigate("/");
@@ -49,13 +58,13 @@ function AddStudent() {
         <Controller
           name="name"
           control={control}
-          render={({ field, formState }) => (
+          render={({ field: { ref, ...restField }, formState }) => (
             <InputField
               label="Name"
               type="text"
               error={formState.errors.name?.message}
               placeholder="Enter name"
-              {...field}
+              {...restField}
             />
           )}
         />
@@ -63,13 +72,13 @@ function AddStudent() {
         <Controller
           name="marks"
           control={control}
-          render={({ field, formState }) => (
+          render={({ field: { ref, ...restField }, formState }) => (
             <InputField
               label="Marks"
               type="number"
               error={formState.errors.marks?.message}
               placeholder="Enter marks"
-              {...field}
+              {...restField}
             />
           )}
         />
@@ -77,12 +86,12 @@ function AddStudent() {
         <Controller
           control={control}
           name="subject"
-          render={({ field, formState }) => (
+          render={({ field: { ref, ...restField }, formState }) => (
             <Dropdown
               label="Subject"
               error={formState.errors.subject?.message}
               dropdownData={subjects}
-              {...field}
+              {...restField}
             />
           )}
         />
@@ -90,12 +99,12 @@ function AddStudent() {
         <Controller
           control={control}
           name="grade"
-          render={({ field, formState }) => (
+          render={({ field: { ref, ...restField }, formState }) => (
             <Dropdown
               label="Grads"
               error={formState.errors.grade?.message}
               dropdownData={grades}
-              {...field}
+              {...restField}
             />
           )}
         />

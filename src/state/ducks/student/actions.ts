@@ -1,5 +1,5 @@
 import { action } from "typesafe-actions";
-import { StudentActionTypes } from "./types";
+import { IAddStudentRaw, StudentActionTypes } from "./types";
 
 export const fetchStudents = () => {
   return action(StudentActionTypes.FETCH_STUDENTS, [], {
@@ -8,9 +8,13 @@ export const fetchStudents = () => {
   });
 };
 
-export const addStudent = () => {
-  return action(StudentActionTypes.ADD_STUDENT, [], {
-    method: "get",
-    route: "/students",
-  });
+export const addStudent = (data: IAddStudentRaw) => {
+  return action(
+    StudentActionTypes.ADD_STUDENT,
+    { data },
+    {
+      method: "post",
+      route: "/students",
+    }
+  );
 };

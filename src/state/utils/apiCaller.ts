@@ -1,4 +1,4 @@
-export default function apiCaller<T>(
+export function apiCaller<T>(
   method: string,
   path: string,
   data?: any

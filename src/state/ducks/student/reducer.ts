@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IStudentRaw } from "./types";
 export const userSlice = createSlice({
   name: "student",
+
   initialState: {
     data: [
       {
@@ -36,7 +37,10 @@ export const userSlice = createSlice({
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      state.data = [...state.data, ...payload];
+      console.log("reducer action playload ", { payload });
+
+      state.data = [...payload];
+      console.log("2", state.data);
     },
   },
 });
