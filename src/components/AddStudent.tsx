@@ -1,6 +1,7 @@
 import { Button, Container, Grid } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import InputField from "./InputField";
 import { number, object, string } from "yup";
@@ -24,7 +25,8 @@ interface IProps {
 }
 
 function AddStudent({ addStudent }: IProps) {
-  // const navigate = useNavigate();
+  let { studentId } = useParams();
+  console.log(studentId);
 
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(addStudentSchema),
@@ -53,7 +55,7 @@ function AddStudent({ addStudent }: IProps) {
   return (
     <Container maxWidth="xs">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1> Add Student Data </h1>
+        <h1> {studentId ? "Edit Student Data" : "Add Student data"} </h1>
 
         <Controller
           name="name"

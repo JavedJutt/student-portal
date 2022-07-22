@@ -16,7 +16,11 @@ function App() {
           <RoutingHandler />
           <Routes>
             <Route path="/" element={<StudentTableContainer />} />
-            <Route path="/students" element={<AddStudentContainer />} />
+            <Route path="student" element={<AddStudentContainer />} />
+            <Route
+              path="student/:studentId"
+              element={<AddStudentContainer />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>
