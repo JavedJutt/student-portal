@@ -24,7 +24,7 @@ interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
 }
 
-function AddStudent({ addStudent }: IProps) {
+function StudentForm({ addStudent }: IProps) {
   let { studentId } = useParams();
   console.log(studentId);
 
@@ -135,4 +135,4 @@ function AddStudent({ addStudent }: IProps) {
   );
 }
 
-export default AddStudent;
+export default StudentForm;

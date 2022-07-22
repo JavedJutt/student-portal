@@ -5,7 +5,7 @@ import store from "./state/Configurestore";
 import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddStudentContainer from "./containers/AddSudentContainer";
+import StudentFormContainer from "./containers/StudentFormContainer";
 import RoutingHandler from "./helpers/history";
 
 function App() {
@@ -16,10 +16,10 @@ function App() {
           <RoutingHandler />
           <Routes>
             <Route path="/" element={<StudentTableContainer />} />
-            <Route path="student" element={<AddStudentContainer />} />
+            <Route path="student" element={<StudentFormContainer />} />
             <Route
               path="student/:studentId"
-              element={<AddStudentContainer />}
+              element={<StudentFormContainer />}
             />
           </Routes>
         </BrowserRouter>
