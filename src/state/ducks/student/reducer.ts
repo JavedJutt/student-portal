@@ -42,7 +42,14 @@ export const userSlice = createSlice({
       state.data = [...payload];
       console.log("2", state.data);
     },
+    fetchSpecificStudentsSuccess: (
+      state,
+      payload: { payload: IStudentRaw }
+    ) => {
+      console.log("data in reducer action ", payload);
+    },
   },
 });
-export const { fetchStudentsSuccess } = userSlice.actions;
+export const { fetchStudentsSuccess, fetchSpecificStudentsSuccess } =
+  userSlice.actions;
 export default userSlice.reducer;

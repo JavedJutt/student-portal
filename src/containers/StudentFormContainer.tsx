@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import StudentForm from "../components/StudentForm";
 
 import { IApplicationState } from "../state/ducks";
-import { addStudent } from "../state/ducks/student/actions";
+import {
+  addStudent,
+  fetchSpecificStudent,
+} from "../state/ducks/student/actions";
 import { IAddStudentRaw, IStudentState } from "../state/ducks/student/types";
 
 function StudentFormContainer() {
@@ -16,6 +19,10 @@ function StudentFormContainer() {
   const dispatchToProps = {
     addStudent: useCallback(
       (data: IAddStudentRaw) => dispatch(addStudent(data)),
+      [dispatch]
+    ),
+    fetchSpecificStudent: useCallback(
+      (id: string | undefined) => dispatch(fetchSpecificStudent(id)),
       [dispatch]
     ),
   };

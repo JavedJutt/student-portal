@@ -1,6 +1,6 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import { apiCaller } from "../../utils/apiCaller";
-import { fetchStudentsSuccess } from "./reducer";
+import { fetchSpecificStudentsSuccess, fetchStudentsSuccess } from "./reducer";
 import { navigate } from "../../../helpers/history";
 import { IStudentRaw, StudentActionTypes } from "./types";
 
@@ -12,8 +12,21 @@ function* handleFetch(action: any): Generator {
       action.meta.method,
       action.meta.route
     );
-    console.log(" data from api GET: ", res);
+
     yield put(fetchStudentsSuccess(res));
+  } catch {}
+}
+
+function* handleSpecificFetch(action: any): Generator {
+  console.log("handle Pecific fetch running", action.meta.route);
+  try {
+    const res: IStudentRaw | any = yield call(
+      apiCaller,
+      action.meta.method,
+      action.meta.route
+    );
+    console.log(" data from api GET: ", res);
+    yield put(fetchSpecificStudentsSuccess(res));
   } catch {}
 }
 
@@ -66,6 +79,10 @@ function* watchFetchRequest(): Generator {
   yield takeEvery(StudentActionTypes.ADD_STUDENT, handleAdd);
   yield takeEvery(StudentActionTypes.EDIT_STUDENT, handleEdit);
   yield takeEvery(StudentActionTypes.DELETE_STUDENT, handleDelete);
+  yield takeEvery(
+    StudentActionTypes.FETCH_SPECIFIC_STUDENTS,
+    handleSpecificFetch
+  );
 }
 
 export default function* studentSaga() {

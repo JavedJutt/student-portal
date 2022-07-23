@@ -25,6 +25,7 @@ export interface IAddStudentRaw {
 
 export const StudentActionTypes = {
   FETCH_STUDENTS: "@@students/FETCH_STUDENTS",
+  FETCH_SPECIFIC_STUDENTS: "@@students/FETCH_SPECIFIC_STUDENTS",
   ADD_STUDENT: "@@students/ADD_STUDENT",
   EDIT_STUDENT: "@@students/EDIT_STUDENT",
   DELETE_STUDENT: "@@students/DELETE_STUDENT",

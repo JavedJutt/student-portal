@@ -6,14 +6,9 @@ import Dropdown from "./Dropdown";
 import InputField from "./InputField";
 import { number, object, string } from "yup";
 import { grades, subjects } from "../helpers/data";
-import {
-  IAddStudentRaw,
-  IStudentRaw,
-  IStudentState,
-} from "../state/ducks/student/types";
-import { useCallback } from "react";
+import { IAddStudentRaw } from "../state/ducks/student/types";
+import { useCallback, useEffect } from "react";
 import { navigate } from "../helpers/history";
-import { FindDefaultEditValues } from "../helpers";
 
 const addStudentSchema = object({
   name: string().required("name is required"),
@@ -28,13 +23,18 @@ const addStudentSchema = object({
 interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
   data: any;
+  fetchSpecificStudent: (id: string | undefined) => void;
 }
 
-function StudentForm({ addStudent, data }: IProps) {
+function StudentForm({ addStudent, data, fetchSpecificStudent }: IProps) {
   let { studentId } = useParams();
-  console.log(studentId);
-  const EditDefaultValues = FindDefaultEditValues(data, studentId);
-  console.log(" 7 ", EditDefaultValues);
+
+  useEffect(() => {
+    if (studentId) {
+      fetchSpecificStudent(studentId);
+    }
+  }, [studentId, fetchSpecificStudent]);
+
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(addStudentSchema),
 

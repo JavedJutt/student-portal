@@ -7,6 +7,12 @@ export const fetchStudents = () => {
     route: "/students",
   });
 };
+export const fetchSpecificStudent = (id: string | undefined) => {
+  return action(StudentActionTypes.FETCH_SPECIFIC_STUDENTS, [], {
+    method: "get",
+    route: "/students/" + id,
+  });
+};
 
 export const addStudent = (data: IAddStudentRaw) => {
   return action(

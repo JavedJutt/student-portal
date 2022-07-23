@@ -11,12 +11,7 @@ import {
 
 import Paper from "@mui/material/Paper";
 import React, { useEffect } from "react";
-import {
-  IAddStudentRaw,
-  IDispatchToProps,
-  IStudentRaw,
-  IStudentState,
-} from "../state/ducks/student/types";
+import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
 import { navigate } from "../helpers/history";
