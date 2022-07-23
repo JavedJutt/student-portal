@@ -12,6 +12,7 @@ import {
 import Paper from "@mui/material/Paper";
 import React, { useEffect } from "react";
 import {
+  IAddStudentRaw,
   IDispatchToProps,
   IStudentRaw,
   IStudentState,
@@ -21,9 +22,14 @@ import { colors } from "../helpers/data";
 import { navigate } from "../helpers/history";
 import MenuComp from "./MenuComp";
 
-type AllProps = IDispatchToProps & IStudentState;
+// type AllProps = IDispatchToProps & IStudentState ;
+interface IProps {
+  fetchStudents: () => void;
+  data: IStudentRaw[];
+  deleteStudent: (data: IAddStudentRaw) => void;
+}
 
-function StudentTable({ fetchStudents, data }: AllProps) {
+function StudentTable({ fetchStudents, data, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
@@ -56,8 +62,8 @@ function StudentTable({ fetchStudents, data }: AllProps) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((obj: IStudentRaw, index) => (
-                <TableRow key={index}>
+              {data.map((obj: IStudentRaw, index: number) => (
+                <TableRow key={obj._id}>
                   <TableCell>{obj.name} </TableCell>
                   <TableCell>{obj.marks} </TableCell>
                   <TableCell>{obj.subject} </TableCell>
@@ -66,7 +72,11 @@ function StudentTable({ fetchStudents, data }: AllProps) {
                   </TableCell>
                   <TableCell>{specificDate(obj.time)} </TableCell>
                   <TableCell>
-                    <MenuComp obj={obj} index={index} />
+                    <MenuComp
+                      item={obj}
+                      index={index}
+                      deleteStudent={deleteStudent}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

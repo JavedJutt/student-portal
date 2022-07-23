@@ -1,7 +1,7 @@
 import { MetaAction, TypeConstant } from "typesafe-actions";
 
 export interface IStudentState {
-  readonly data: IStudentRaw[];
+  data: IStudentRaw[];
 }
 
 export type ApiResponse = Record<string, any>;

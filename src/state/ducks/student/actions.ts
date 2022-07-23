@@ -18,7 +18,7 @@ export const addStudent = (data: IAddStudentRaw) => {
     }
   );
 };
-export const EditStudent = (data: IAddStudentRaw) => {
+export const editStudent = (data: IAddStudentRaw) => {
   return action(
     StudentActionTypes.EDIT_STUDENT,
     { data },
@@ -28,7 +28,8 @@ export const EditStudent = (data: IAddStudentRaw) => {
     }
   );
 };
-export const DeleteStudent = (data: IAddStudentRaw) => {
+export const deleteStudent = (data: IAddStudentRaw) => {
+  console.log(" data from action", data);
   return action(
     StudentActionTypes.DELETE_STUDENT,
     { data },

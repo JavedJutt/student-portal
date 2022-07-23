@@ -5,13 +5,14 @@ import { navigate } from "../../../helpers/history";
 import { IStudentRaw, StudentActionTypes } from "./types";
 
 function* handleFetch(action: any): Generator {
+  console.log("handle fetch running");
   try {
     const res: IStudentRaw[] | any = yield call(
       apiCaller,
       action.meta.method,
       action.meta.route
     );
-
+    console.log(" data from api GET: ", res);
     yield put(fetchStudentsSuccess(res));
   } catch {}
 }
@@ -46,7 +47,7 @@ function* handleEdit(action: any): Generator {
 }
 function* handleDelete(action: any): Generator {
   try {
-    const res: IStudentRaw[] | any = yield call(
+    const res: IStudentRaw[] | any | undefined = yield call(
       apiCaller,
       action.meta.method,
       action.meta.route,
@@ -54,6 +55,8 @@ function* handleDelete(action: any): Generator {
     );
     console.log("1.", res);
   } catch {
+    navigate("/studentndb");
+    navigate("/");
     console.log("came in catch");
   }
 }

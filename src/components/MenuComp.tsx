@@ -2,9 +2,17 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { navigate } from "../helpers/history";
-import { IStudentRaw } from "../state/ducks/student/types";
+import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 
-function MenuComp({ obj, index }: { obj: IStudentRaw; index: any }) {
+function MenuComp({
+  item,
+  index,
+  deleteStudent,
+}: {
+  item: IStudentRaw;
+  index: any;
+  deleteStudent: (data: IAddStudentRaw) => void;
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,10 +26,11 @@ function MenuComp({ obj, index }: { obj: IStudentRaw; index: any }) {
     let route = "/student/" + id;
     navigate(route);
   };
-  const handleCloseDelete = (id: number | any) => {
+  const handleCloseDelete = (item: IStudentRaw | any) => {
     setAnchorEl(null);
-    console.log("data on click", id);
-    navigate("/");
+    console.log("data on delete click", item);
+
+    deleteStudent(item);
   };
   return (
     <>
@@ -51,8 +60,8 @@ function MenuComp({ obj, index }: { obj: IStudentRaw; index: any }) {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={() => handleCloseEdit(obj._id)}>Edit</MenuItem>
-        <MenuItem onClick={() => handleCloseDelete(obj._id)}>Delete</MenuItem>
+        <MenuItem onClick={() => handleCloseEdit(item._id)}>Edit</MenuItem>
+        <MenuItem onClick={() => handleCloseDelete(item)}>Delete</MenuItem>
       </Menu>
     </>
   );
