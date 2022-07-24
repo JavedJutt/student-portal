@@ -7,12 +7,13 @@ import {
   addStudent,
   fetchSpecificStudent,
 } from "../state/ducks/student/actions";
-import { IAddStudentRaw, IStudentState } from "../state/ducks/student/types";
+import { IAddStudentRaw, IStudentState2 } from "../state/ducks/student/types";
 
 function StudentFormContainer() {
   const dispatch = useDispatch();
-  const stateToProps: IStudentState = useSelector(
+  const stateToProps: IStudentState2 = useSelector(
     ({ student }: IApplicationState) => ({
+      specificStudent: student.specificStudent,
       data: student.data,
     })
   );

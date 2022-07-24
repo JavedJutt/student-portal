@@ -30,6 +30,7 @@ export const userSlice = createSlice({
         time: "2022-07-18T08:07:28.3Z",
       },
     ],
+    specificStudent: {},
   },
 
   reducers: {
@@ -46,7 +47,9 @@ export const userSlice = createSlice({
       state,
       payload: { payload: IStudentRaw }
     ) => {
-      console.log("data in reducer action ", payload);
+      console.log("10 data in reducer action ", state.specificStudent);
+      state.specificStudent = payload;
+      console.log("10 data in reducer action ", state.specificStudent);
     },
   },
 });

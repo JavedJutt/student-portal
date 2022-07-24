@@ -6,7 +6,7 @@ import Dropdown from "./Dropdown";
 import InputField from "./InputField";
 import { number, object, string } from "yup";
 import { grades, subjects } from "../helpers/data";
-import { IAddStudentRaw } from "../state/ducks/student/types";
+import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 import { useCallback, useEffect } from "react";
 import { navigate } from "../helpers/history";
 
@@ -24,9 +24,15 @@ interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
   data: any;
   fetchSpecificStudent: (id: string | undefined) => void;
+  specificStudent: IStudentRaw | any;
 }
 
-function StudentForm({ addStudent, data, fetchSpecificStudent }: IProps) {
+function StudentForm({
+  addStudent,
+  data,
+  fetchSpecificStudent,
+  specificStudent,
+}: IProps) {
   let { studentId } = useParams();
 
   useEffect(() => {
@@ -35,7 +41,19 @@ function StudentForm({ addStudent, data, fetchSpecificStudent }: IProps) {
     }
   }, [studentId, fetchSpecificStudent]);
 
-  const { handleSubmit, control } = useForm({
+  useEffect(() => {
+    if (specificStudent.payload !== undefined) {
+      reset({
+        name: specificStudent.payload.name,
+        marks: specificStudent.payload.marks,
+        subject: specificStudent.payload.subject,
+        grade: specificStudent.payload.grade,
+        time: "",
+      });
+    }
+  }, [specificStudent]);
+
+  const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(addStudentSchema),
 
     defaultValues: {
@@ -46,7 +64,16 @@ function StudentForm({ addStudent, data, fetchSpecificStudent }: IProps) {
       time: "",
     },
   });
-  console.log("data in store", data);
+  console.log("9. data in store", specificStudent.payload);
+  // if (specificStudent.payload !== undefined) {
+  //   reset({
+  //     name: specificStudent.payload.name,
+  //     marks: specificStudent.payload.marks,
+  //     subject: specificStudent.payload.subject,
+  //     grade: specificStudent.payload.grade,
+  //     time: "",
+  //   });
+  // }
   const onSubmit = useCallback(
     (data: IAddStudentRaw) => {
       data.time = new Date();

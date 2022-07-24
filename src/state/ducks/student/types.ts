@@ -3,7 +3,15 @@ import { MetaAction, TypeConstant } from "typesafe-actions";
 export interface IStudentState {
   data: IStudentRaw[];
 }
+export interface IStudentState2 {
+  data: IStudentRaw[];
+  specificStudent: IStudentRaw | any;
+}
 
+export interface IStudentState3 {
+  student: IStudentRaw[];
+  specificStudent: IStudentRaw | any;
+}
 export type ApiResponse = Record<string, any>;
 export interface IStudentRaw extends ApiResponse {
   _id: number;
