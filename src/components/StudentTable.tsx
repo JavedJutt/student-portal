@@ -8,26 +8,25 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import Paper from "@mui/material/Paper";
 import React, { useEffect } from "react";
-import {
-  IDispatchToProps,
-  IStudentRaw,
-  IStudentState,
-} from "../state/ducks/student/types";
+import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
-import { useNavigate } from "react-router-dom";
+import { navigate } from "../helpers/history";
+import ActionMenu from "./common/ActionMenu";
 
-type AllProps = IDispatchToProps & IStudentState;
+interface IProps {
+  fetchStudents: () => void;
+  list: IStudentRaw[];
+  deleteStudent: (data: IAddStudentRaw) => void;
+}
 
-function StudentTable({ fetchStudents, data }: AllProps) {
+function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-
-  let navigate = useNavigate();
 
   return (
     <div>
@@ -36,14 +35,14 @@ function StudentTable({ fetchStudents, data }: AllProps) {
           variant="outlined"
           sx={{ color: "#343744", mr: "100px", my: "20px" }}
           onClick={() => {
-            navigate("/students");
+            navigate("/student");
           }}
         >
           + Add Data
         </Button>
       </Grid>
 
-      {data.length > 0 ? (
+      {list.length > 0 ? (
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -57,17 +56,21 @@ function StudentTable({ fetchStudents, data }: AllProps) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((data: IStudentRaw) => (
-                <TableRow key={data._id}>
-                  <TableCell>{data.name} </TableCell>
-                  <TableCell>{data.marks} </TableCell>
-                  <TableCell>{data.subject} </TableCell>
-                  <TableCell sx={{ bgcolor: colors[data.grade] }}>
-                    {data.grade}
+              {list.map((student: IStudentRaw, index: number) => (
+                <TableRow key={student._id}>
+                  <TableCell>{student.name} </TableCell>
+                  <TableCell>{student.marks} </TableCell>
+                  <TableCell>{student.subject} </TableCell>
+                  <TableCell sx={{ bgcolor: colors[student.grade] }}>
+                    {student.grade}
                   </TableCell>
-                  <TableCell>{specificDate(data.time)} </TableCell>
+                  <TableCell>{specificDate(student.time)} </TableCell>
                   <TableCell>
-                    <MoreVertIcon></MoreVertIcon>
+                    <ActionMenu
+                      item={student}
+                      index={index}
+                      deleteStudent={deleteStudent}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

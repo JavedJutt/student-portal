@@ -5,16 +5,22 @@ import store from "./state/Configurestore";
 import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddStudent from "./components/AddStudent";
+import StudentFormContainer from "./containers/StudentFormContainer";
+import RoutingHandler from "./helpers/history";
 
 function App() {
   return (
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
+          <RoutingHandler />
           <Routes>
             <Route path="/" element={<StudentTableContainer />} />
-            <Route path="/students" element={<AddStudent />} />
+            <Route path="student" element={<StudentFormContainer />} />
+            <Route
+              path="student/:studentId"
+              element={<StudentFormContainer />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>

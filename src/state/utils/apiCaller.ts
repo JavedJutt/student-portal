@@ -1,4 +1,4 @@
-export default function apiCaller<T>(
+export function apiCaller<T>(
   method: string,
   path: string,
   data?: any
@@ -10,5 +10,9 @@ export default function apiCaller<T>(
       "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : null,
-  }).then((res) => res.json());
+  }).then((res) => {
+    return !(method === "delete" && path.includes("students"))
+      ? res.json()
+      : null;
+  });
 }

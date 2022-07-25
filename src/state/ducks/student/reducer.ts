@@ -2,33 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IStudentRaw } from "./types";
 export const userSlice = createSlice({
   name: "student",
+
   initialState: {
-    data: [
-      {
-        _id: 1,
-        name: "Javed",
-        marks: 100,
-        subject: "Math",
-        grade: "A+",
-        time: "2022-07-18T08:07:28.3Z",
-      },
-      {
-        _id: 2,
-        name: "Ahmad",
-        marks: 80,
-        subject: "English",
-        grade: "B+",
-        time: "2022-07-18T08:07:28.3Z",
-      },
-      {
-        _id: 3,
-        name: "zakria",
-        marks: 40,
-        subject: "English",
-        grade: "F",
-        time: "2022-07-18T08:07:28.3Z",
-      },
-    ],
+    list: [] as IStudentRaw[],
+    specificStudent: {},
   },
 
   reducers: {
@@ -36,9 +13,25 @@ export const userSlice = createSlice({
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      state.data = [...state.data, ...payload];
+      state.list = [...payload];
+    },
+    deleteStudentSuccess: (
+      state,
+      { payload }: { payload: IStudentRaw[] | any }
+    ) => {
+      state.list = state.list.filter((student) => student._id !== payload._id);
+    },
+    fetchSpecificStudentsSuccess: (
+      state,
+      payload: { payload: IStudentRaw }
+    ) => {
+      state.specificStudent = payload;
     },
   },
 });
-export const { fetchStudentsSuccess } = userSlice.actions;
+export const {
+  fetchStudentsSuccess,
+  fetchSpecificStudentsSuccess,
+  deleteStudentSuccess,
+} = userSlice.actions;
 export default userSlice.reducer;
