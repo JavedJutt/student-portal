@@ -1,6 +1,10 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import { apiCaller } from "../../utils/apiCaller";
-import { fetchSpecificStudentsSuccess, fetchStudentsSuccess } from "./reducer";
+import {
+  deleteStudentSuccess,
+  fetchSpecificStudentsSuccess,
+  fetchStudentsSuccess,
+} from "./reducer";
 import { navigate } from "../../../helpers/history";
 import { IStudentRaw, StudentActionTypes } from "./types";
 
@@ -46,6 +50,7 @@ function* handleAdd(action: any): Generator {
 }
 function* handleEdit(action: any): Generator {
   try {
+    console.log("data in edit saga", action.meta.route);
     const res: IStudentRaw[] | any = yield call(
       apiCaller,
       action.meta.method,
@@ -53,8 +58,8 @@ function* handleEdit(action: any): Generator {
       action.payload.data
     );
     console.log("1.", res);
-    navigate("/");
   } catch {
+    navigate("/");
     console.log("came in catch");
   }
 }
@@ -66,10 +71,8 @@ function* handleDelete(action: any): Generator {
       action.meta.route,
       action.payload.data
     );
-    console.log("1.", res);
-  } catch {
-    navigate("/studentndb");
-    navigate("/");
+  } catch (e) {
+    yield put(deleteStudentSuccess(action.payload.data));
     console.log("came in catch");
   }
 }

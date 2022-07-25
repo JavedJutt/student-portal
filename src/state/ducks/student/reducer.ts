@@ -43,6 +43,17 @@ export const userSlice = createSlice({
       state.data = [...payload];
       console.log("2", state.data);
     },
+    deleteStudentSuccess: (
+      state,
+      { payload }: { payload: IStudentRaw[] | any }
+    ) => {
+      console.log("reducer delete action playload ", payload);
+      const index = state.data.findIndex((obj) => {
+        return obj._id === payload._id;
+      });
+      state.data.splice(index, 1);
+      console.log("index ", state.data);
+    },
     fetchSpecificStudentsSuccess: (
       state,
       payload: { payload: IStudentRaw }
@@ -53,6 +64,9 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { fetchStudentsSuccess, fetchSpecificStudentsSuccess } =
-  userSlice.actions;
+export const {
+  fetchStudentsSuccess,
+  fetchSpecificStudentsSuccess,
+  deleteStudentSuccess,
+} = userSlice.actions;
 export default userSlice.reducer;

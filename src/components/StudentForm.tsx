@@ -4,27 +4,19 @@ import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import InputField from "./InputField";
-import { number, object, string } from "yup";
-import { grades, subjects } from "../helpers/data";
+
+import { formDefaultValues, grades, subjects } from "../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 import { useCallback, useEffect } from "react";
 import { navigate } from "../helpers/history";
-
-const addStudentSchema = object({
-  name: string().required("name is required"),
-  marks: number()
-    .typeError("Marks are required")
-    .min(0, "Marks cannot be less than 0")
-    .max(100, "Marks cannot be greater than 100"),
-  subject: string().required("subject must be required"),
-  grade: string().required("must be required"),
-});
+import { addStudentSchema } from "../helpers/schemas";
 
 interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
   data: any;
   fetchSpecificStudent: (id: string | undefined) => void;
   specificStudent: IStudentRaw | any;
+  editStudent: (data: IAddStudentRaw) => void;
 }
 
 function StudentForm({
@@ -32,8 +24,16 @@ function StudentForm({
   data,
   fetchSpecificStudent,
   specificStudent,
+  editStudent,
 }: IProps) {
   let { studentId } = useParams();
+  const isEditMode = !!studentId;
+
+  const { handleSubmit, control, reset } = useForm({
+    resolver: yupResolver(addStudentSchema),
+
+    defaultValues: formDefaultValues,
+  });
 
   useEffect(() => {
     if (studentId) {
@@ -42,48 +42,27 @@ function StudentForm({
   }, [studentId, fetchSpecificStudent]);
 
   useEffect(() => {
-    if (specificStudent.payload !== undefined) {
-      reset({
-        name: specificStudent.payload.name,
-        marks: specificStudent.payload.marks,
-        subject: specificStudent.payload.subject,
-        grade: specificStudent.payload.grade,
-        time: "",
-      });
-    }
-  }, [specificStudent]);
+    if (isEditMode && specificStudent.payload) reset(specificStudent.payload);
 
-  const { handleSubmit, control, reset } = useForm({
-    resolver: yupResolver(addStudentSchema),
-
-    defaultValues: {
-      name: "hgb",
-      marks: 0,
-      subject: "Math",
-      grade: "F",
-      time: "",
-    },
-  });
+    return () => {
+      reset(formDefaultValues);
+    };
+  }, [specificStudent, reset]);
   console.log("9. data in store", specificStudent.payload);
-  // if (specificStudent.payload !== undefined) {
-  //   reset({
-  //     name: specificStudent.payload.name,
-  //     marks: specificStudent.payload.marks,
-  //     subject: specificStudent.payload.subject,
-  //     grade: specificStudent.payload.grade,
-  //     time: "",
-  //   });
-  // }
+
   const onSubmit = useCallback(
     (data: IAddStudentRaw) => {
-      data.time = new Date();
-      addStudent(data);
+      data.time = new Date().toISOString();
+      if (isEditMode) {
+        console.log("running edit action api");
+        editStudent({ ...data, _id: studentId });
+      } else addStudent(data);
     },
-    [addStudent]
+    [studentId, editStudent, addStudent]
   );
 
   const handleCancleClick = () => {
-    console.log("cancel clicked");
+    console.log("cancel clicked", specificStudent.payload);
     navigate("/");
   };
   return (

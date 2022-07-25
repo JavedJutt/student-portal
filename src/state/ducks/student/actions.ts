@@ -25,12 +25,15 @@ export const addStudent = (data: IAddStudentRaw) => {
   );
 };
 export const editStudent = (data: IAddStudentRaw) => {
+  console.log("data in edit student action ", data);
+  let id = data._id;
+  delete data._id;
   return action(
     StudentActionTypes.EDIT_STUDENT,
     { data },
     {
       method: "put",
-      route: "/students/" + data._id,
+      route: "/students/" + id,
     }
   );
 };

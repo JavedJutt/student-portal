@@ -5,6 +5,7 @@ import StudentForm from "../components/StudentForm";
 import { IApplicationState } from "../state/ducks";
 import {
   addStudent,
+  editStudent,
   fetchSpecificStudent,
 } from "../state/ducks/student/actions";
 import { IAddStudentRaw, IStudentState2 } from "../state/ducks/student/types";
@@ -20,6 +21,10 @@ function StudentFormContainer() {
   const dispatchToProps = {
     addStudent: useCallback(
       (data: IAddStudentRaw) => dispatch(addStudent(data)),
+      [dispatch]
+    ),
+    editStudent: useCallback(
+      (data: IAddStudentRaw) => dispatch(editStudent(data)),
       [dispatch]
     ),
     fetchSpecificStudent: useCallback(

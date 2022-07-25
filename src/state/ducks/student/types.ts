@@ -23,7 +23,7 @@ export interface IStudentRaw extends ApiResponse {
 }
 
 export interface IAddStudentRaw {
-  _id?: number;
+  _id?: string;
   name: string;
   marks: number;
   subject: string;
