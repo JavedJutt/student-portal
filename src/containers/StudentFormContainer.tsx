@@ -18,7 +18,7 @@ function StudentFormContainer() {
   const stateToProps: IStudentStateModified = useSelector(
     ({ student }: IApplicationState) => ({
       specificStudent: student.specificStudent,
-      data: student.data,
+      list: student.list,
     })
   );
   const dispatchToProps = {

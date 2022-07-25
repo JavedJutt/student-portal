@@ -15,16 +15,15 @@ import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
 import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
 import { navigate } from "../helpers/history";
-import MenuComp from "./MenuComp";
+import ActionMenu from "./common/ActionMenu";
 
-// type AllProps = IDispatchToProps & IStudentState ;
 interface IProps {
   fetchStudents: () => void;
-  data: IStudentRaw[];
+  list: IStudentRaw[];
   deleteStudent: (data: IAddStudentRaw) => void;
 }
 
-function StudentTable({ fetchStudents, data, deleteStudent }: IProps) {
+function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
@@ -43,7 +42,7 @@ function StudentTable({ fetchStudents, data, deleteStudent }: IProps) {
         </Button>
       </Grid>
 
-      {data.length > 0 ? (
+      {list.length > 0 ? (
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -57,18 +56,18 @@ function StudentTable({ fetchStudents, data, deleteStudent }: IProps) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((obj: IStudentRaw, index: number) => (
-                <TableRow key={obj._id}>
-                  <TableCell>{obj.name} </TableCell>
-                  <TableCell>{obj.marks} </TableCell>
-                  <TableCell>{obj.subject} </TableCell>
-                  <TableCell sx={{ bgcolor: colors[obj.grade] }}>
-                    {obj.grade}
+              {list.map((student: IStudentRaw, index: number) => (
+                <TableRow key={student._id}>
+                  <TableCell>{student.name} </TableCell>
+                  <TableCell>{student.marks} </TableCell>
+                  <TableCell>{student.subject} </TableCell>
+                  <TableCell sx={{ bgcolor: colors[student.grade] }}>
+                    {student.grade}
                   </TableCell>
-                  <TableCell>{specificDate(obj.time)} </TableCell>
+                  <TableCell>{specificDate(student.time)} </TableCell>
                   <TableCell>
-                    <MenuComp
-                      item={obj}
+                    <ActionMenu
+                      item={student}
                       index={index}
                       deleteStudent={deleteStudent}
                     />

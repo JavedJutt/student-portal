@@ -25,7 +25,7 @@ export const addStudent = (data: IAddStudentRaw) => {
   );
 };
 export const editStudent = (data: IAddStudentRaw) => {
-  let id = data._id;
+  const id = data._id;
   delete data._id;
   return action(
     StudentActionTypes.EDIT_STUDENT,

@@ -1,10 +1,10 @@
 import { MetaAction, TypeConstant } from "typesafe-actions";
 
 export interface IStudentState {
-  data: IStudentRaw[];
+  list: IStudentRaw[];
 }
 export interface IStudentStateModified {
-  data: IStudentRaw[];
+  list: IStudentRaw[];
   specificStudent: IStudentRaw | any;
 }
 
@@ -47,11 +47,6 @@ export interface IAddMetaAction extends MetaAction<TypeConstant, IAddMeta> {}
 export interface IDispatchToProps {
   fetchStudents: () => IMetaAction;
 }
-
-// export interface IDispatchToPropsAddStudent {
-//   addStudent: (data:IAddStudentRaw) => IAddMetaAction;
-// }
-
 export interface IDispatchToPropsAddStudent {
   addStudent: (data: IAddStudentRaw) => IAddMetaAction;
 }

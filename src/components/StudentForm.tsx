@@ -2,8 +2,8 @@ import { Button, Container, Grid } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import Dropdown from "./Dropdown";
-import InputField from "./InputField";
+import SelectFeild from "./common/feilds/SelectFeild";
+import InputField from "./common/feilds/InputField";
 
 import { formDefaultValues, grades, subjects } from "../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
@@ -13,7 +13,7 @@ import { addStudentSchema } from "../helpers/schemas";
 
 interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
-  data: any;
+  list: any;
   fetchSpecificStudent: (id: string | undefined) => void;
   specificStudent: IStudentRaw | any;
   editStudent: (data: IAddStudentRaw) => void;
@@ -21,7 +21,7 @@ interface IProps {
 
 function StudentForm({
   addStudent,
-  data,
+  list,
   fetchSpecificStudent,
   specificStudent,
   editStudent,
@@ -35,30 +35,24 @@ function StudentForm({
 
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(addStudentSchema),
-
     defaultValues: formDefaultValues,
   });
 
   useEffect(() => {
-    if (studentId) {
-      fetchSpecificStudent(studentId);
-    }
+    if (studentId) fetchSpecificStudent(studentId);
   }, [studentId, fetchSpecificStudent]);
 
   useEffect(() => {
     if (isEditMode && specificStudent.payload) reset(specificStudent.payload);
 
-    return () => {
-      reset(formDefaultValues);
-    };
+    return () => reset(formDefaultValues);
   }, [specificStudent, reset]);
 
   const onSubmit = useCallback(
     (data: IAddStudentRaw) => {
       data.time = new Date().toISOString();
-      if (isEditMode) {
-        editStudent({ ...data, _id: studentId });
-      } else addStudent(data);
+      if (isEditMode) editStudent({ ...data, _id: studentId });
+      else addStudent(data);
     },
     [studentId, isEditMode, editStudent, addStudent]
   );
@@ -69,7 +63,7 @@ function StudentForm({
   return (
     <Container maxWidth="xs">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1> {studentId ? "Edit Student Data" : "Add Student data"} </h1>
+        <h1>{studentId ? "Edit Student Data" : "Add Student data"}</h1>
 
         <Controller
           name="name"
@@ -103,7 +97,7 @@ function StudentForm({
           control={control}
           name="subject"
           render={({ field: { ref, ...restField }, formState }) => (
-            <Dropdown
+            <SelectFeild
               label="Subject"
               error={formState.errors.subject?.message}
               dropdownData={subjects}
@@ -116,7 +110,7 @@ function StudentForm({
           control={control}
           name="grade"
           render={({ field: { ref, ...restField }, formState }) => (
-            <Dropdown
+            <SelectFeild
               label="Grads"
               error={formState.errors.grade?.message}
               dropdownData={grades}

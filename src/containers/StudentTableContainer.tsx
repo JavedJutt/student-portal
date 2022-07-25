@@ -9,7 +9,7 @@ const StudentTableContainer = () => {
   const dispatch = useDispatch();
   const stateToProps: IStudentState = useSelector(
     ({ student }: IApplicationState) => ({
-      data: student.data,
+      list: student.list,
     })
   );
 

@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: "student",
 
   initialState: {
-    data: [] as IStudentRaw[],
+    list: [] as IStudentRaw[],
     specificStudent: {},
   },
 
@@ -13,16 +13,13 @@ export const userSlice = createSlice({
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      state.data = [...payload];
+      state.list = [...payload];
     },
     deleteStudentSuccess: (
       state,
       { payload }: { payload: IStudentRaw[] | any }
     ) => {
-      const index = state.data.findIndex((obj) => {
-        return obj._id === payload._id;
-      });
-      state.data.splice(index, 1);
+      state.list = state.list.filter((student) => student._id !== payload._id);
     },
     fetchSpecificStudentsSuccess: (
       state,

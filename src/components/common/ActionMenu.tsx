@@ -1,10 +1,10 @@
 import { Button, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { navigate } from "../helpers/history";
-import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
+import { navigate } from "../../helpers/history";
+import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 
-function MenuComp({
+function ActionMenu({
   item,
   index,
   deleteStudent,
@@ -66,4 +66,4 @@ function MenuComp({
   );
 }
 
-export default MenuComp;
+export default ActionMenu;
