@@ -2,8 +2,8 @@ import { Button, Container, Grid } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import SelectField from "./common/feilds/SelectField";
-import InputField from "./common/feilds/InputField";
+import SelectField from "./common/fields/SelectField";
+import InputField from "./common/fields/InputField";
 
 import { formDefaultValues, grades, subjects } from "../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
