@@ -2,7 +2,7 @@ import { Button, Container, Grid } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import SelectFeild from "./common/feilds/SelectFeild";
+import SelectField from "./common/feilds/SelectField";
 import InputField from "./common/feilds/InputField";
 
 import { formDefaultValues, grades, subjects } from "../helpers/data";
@@ -97,7 +97,7 @@ function StudentForm({
           control={control}
           name="subject"
           render={({ field: { ref, ...restField }, formState }) => (
-            <SelectFeild
+            <SelectField
               label="Subject"
               error={formState.errors.subject?.message}
               dropdownData={subjects}
@@ -110,7 +110,7 @@ function StudentForm({
           control={control}
           name="grade"
           render={({ field: { ref, ...restField }, formState }) => (
-            <SelectFeild
+            <SelectField
               label="Grads"
               error={formState.errors.grade?.message}
               dropdownData={grades}

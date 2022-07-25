@@ -5,7 +5,7 @@ interface Iprops {
   dropdownData: string[];
   error: string | undefined;
 }
-function SelectFeild({ label, dropdownData, error, ...rest }: Iprops) {
+function SelectField({ label, dropdownData, error, ...rest }: Iprops) {
   return (
     <>
       <label> {label}</label>
@@ -26,4 +26,4 @@ function SelectFeild({ label, dropdownData, error, ...rest }: Iprops) {
   );
 }
 
-export default SelectFeild;
+export default SelectField;
