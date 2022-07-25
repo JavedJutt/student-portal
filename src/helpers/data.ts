@@ -10,7 +10,7 @@ export const subjects = ["English", "Math", "Science"];
 export const grades = ["A+", "A-", "B+", "B-", "F"];
 
 export const formDefaultValues = {
-  name: "hgb",
+  name: "",
   marks: 0,
   subject: "Math",
   grade: "F",

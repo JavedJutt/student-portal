@@ -9,7 +9,6 @@ import { navigate } from "../../../helpers/history";
 import { IStudentRaw, StudentActionTypes } from "./types";
 
 function* handleFetch(action: any): Generator {
-  console.log("handle fetch running");
   try {
     const res: IStudentRaw[] | any = yield call(
       apiCaller,
@@ -22,59 +21,51 @@ function* handleFetch(action: any): Generator {
 }
 
 function* handleSpecificFetch(action: any): Generator {
-  console.log("handle Pecific fetch running", action.meta.route);
   try {
     const res: IStudentRaw | any = yield call(
       apiCaller,
       action.meta.method,
       action.meta.route
     );
-    console.log(" data from api GET: ", res);
+
     yield put(fetchSpecificStudentsSuccess(res));
   } catch {}
 }
 
 function* handleAdd(action: any): Generator {
   try {
-    const res: IStudentRaw[] | any = yield call(
+    yield call(
       apiCaller,
       action.meta.method,
       action.meta.route,
       action.payload.data
     );
-    console.log("1.", res);
+
     navigate("/");
-  } catch {
-    console.log("came in catch");
-  }
+  } catch {}
 }
 function* handleEdit(action: any): Generator {
   try {
-    console.log("data in edit saga", action.meta.route);
-    const res: IStudentRaw[] | any = yield call(
+    yield call(
       apiCaller,
       action.meta.method,
       action.meta.route,
       action.payload.data
     );
-    console.log("1.", res);
   } catch {
     navigate("/");
-    console.log("came in catch");
   }
 }
 function* handleDelete(action: any): Generator {
   try {
-    const res: IStudentRaw[] | any | undefined = yield call(
+    yield call(
       apiCaller,
       action.meta.method,
       action.meta.route,
       action.payload.data
     );
-  } catch (e) {
     yield put(deleteStudentSuccess(action.payload.data));
-    console.log("came in catch");
-  }
+  } catch {}
 }
 
 function* watchFetchRequest(): Generator {

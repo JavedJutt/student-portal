@@ -25,7 +25,6 @@ export const addStudent = (data: IAddStudentRaw) => {
   );
 };
 export const editStudent = (data: IAddStudentRaw) => {
-  console.log("data in edit student action ", data);
   let id = data._id;
   delete data._id;
   return action(
@@ -38,7 +37,6 @@ export const editStudent = (data: IAddStudentRaw) => {
   );
 };
 export const deleteStudent = (data: IAddStudentRaw) => {
-  console.log(" data from action", data);
   return action(
     StudentActionTypes.DELETE_STUDENT,
     { data },

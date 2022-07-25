@@ -7,7 +7,7 @@ import InputField from "./InputField";
 
 import { formDefaultValues, grades, subjects } from "../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { navigate } from "../helpers/history";
 import { addStudentSchema } from "../helpers/schemas";
 
@@ -27,7 +27,11 @@ function StudentForm({
   editStudent,
 }: IProps) {
   let { studentId } = useParams();
-  const isEditMode = !!studentId;
+
+  const isEditMode = useMemo(
+    () => !!studentId && !!specificStudent.payload,
+    [specificStudent, studentId]
+  );
 
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(addStudentSchema),
@@ -48,21 +52,18 @@ function StudentForm({
       reset(formDefaultValues);
     };
   }, [specificStudent, reset]);
-  console.log("9. data in store", specificStudent.payload);
 
   const onSubmit = useCallback(
     (data: IAddStudentRaw) => {
       data.time = new Date().toISOString();
       if (isEditMode) {
-        console.log("running edit action api");
         editStudent({ ...data, _id: studentId });
       } else addStudent(data);
     },
-    [studentId, editStudent, addStudent]
+    [studentId, isEditMode, editStudent, addStudent]
   );
 
   const handleCancleClick = () => {
-    console.log("cancel clicked", specificStudent.payload);
     navigate("/");
   };
   return (

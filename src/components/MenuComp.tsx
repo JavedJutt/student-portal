@@ -28,7 +28,6 @@ function MenuComp({
   };
   const handleCloseDelete = (item: IStudentRaw | any) => {
     setAnchorEl(null);
-    console.log("data on delete click", item);
 
     deleteStudent(item);
   };
