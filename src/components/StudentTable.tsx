@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Grid,
   Table,
@@ -16,6 +17,7 @@ import { specificDate } from "../helpers";
 import { colors } from "../helpers/data";
 import { navigate } from "../helpers/history";
 import ActionMenu from "./common/ActionMenu";
+import SummaryBox from "./common/SummaryBox";
 
 interface IProps {
   fetchStudents: () => void;
@@ -33,7 +35,7 @@ function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
       <Grid container justifyContent="flex-end">
         <Button
           variant="outlined"
-          sx={{ color: "#343744", mr: "100px", my: "20px" }}
+          sx={{ color: "#343744", mr: "100px", mt: "20px" }}
           onClick={() => {
             navigate("/student");
           }}
@@ -41,7 +43,20 @@ function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
           + Add Data
         </Button>
       </Grid>
-
+      <Box
+        sx={{
+          my: 4,
+          height: 100,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+      >
+        <SummaryBox title="Top Grade" summary="A+" isGreen={true} />
+        <SummaryBox title="Most Passed" summary="English" isGreen={true} />
+        <SummaryBox title="Lowest Grade" summary="F" isGreen={false} />
+        <SummaryBox title="Most Failed" summary="Math" isGreen={false} />
+      </Box>
       {list.length > 0 ? (
         <TableContainer component={Paper}>
           <Table>

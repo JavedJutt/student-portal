@@ -10,6 +10,7 @@ const StudentTableContainer = () => {
   const stateToProps: IStudentState = useSelector(
     ({ student }: IApplicationState) => ({
       list: student.list,
+      // summary: getStudentSummary(student),
     })
   );
 
