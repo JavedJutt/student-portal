@@ -8,6 +8,7 @@ export const colors: Record<string, string> = {
 
 export const subjects = ["English", "Math", "Science"];
 export const grades = ["A+", "A-", "B+", "B-", "F"];
+export const gradesPresidance = ["F", "B-", "B+", "A-", "A+"];
 
 export const formDefaultValues = {
   name: "",
