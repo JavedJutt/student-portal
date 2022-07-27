@@ -11,10 +11,9 @@ export const getStudentSummary = createSelector(getList, (list) => {
   let lowestGrade = "--";
 
   for (let item of list) {
-    if (list.indexOf(item) === 0 || highestGrade === "--")
-      highestGrade = item.grade;
-    else {
-      if (
+    if (gradesPresidance.indexOf(item.grade) !== 0) {
+      if (highestGrade === "--") highestGrade = item.grade;
+      else if (
         gradesPresidance.indexOf(item.grade) >
         gradesPresidance.indexOf(highestGrade)
       )
