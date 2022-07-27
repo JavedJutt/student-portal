@@ -23,9 +23,10 @@ interface IProps {
   fetchStudents: () => void;
   list: IStudentRaw[];
   deleteStudent: (data: IAddStudentRaw) => void;
+  summary: Record<string, string> | any;
 }
 
-function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
+function StudentTable({ fetchStudents, list, deleteStudent, summary }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
@@ -52,10 +53,26 @@ function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
           justifyContent: "space-around",
         }}
       >
-        <SummaryBox title="Top Grade" summary="A+" isGreen={true} />
-        <SummaryBox title="Most Passed" summary="English" isGreen={true} />
-        <SummaryBox title="Lowest Grade" summary="F" isGreen={false} />
-        <SummaryBox title="Most Failed" summary="Math" isGreen={false} />
+        <SummaryBox
+          title="Top Grade"
+          summary={summary.highestGrade}
+          isGreen={true}
+        />
+        <SummaryBox
+          title="Most Passed"
+          summary={summary.mostPassedSubject}
+          isGreen={true}
+        />
+        <SummaryBox
+          title="Lowest Grade"
+          summary={summary.lowestGrade}
+          isGreen={false}
+        />
+        <SummaryBox
+          title="Most Failed"
+          summary={summary.mostFailedSubject}
+          isGreen={false}
+        />
       </Box>
       {list.length > 0 ? (
         <TableContainer component={Paper}>

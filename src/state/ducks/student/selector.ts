@@ -6,56 +6,70 @@ import { gradesPresidance } from "../../../helpers/data";
 const getList = (state: IApplicationState) => state.student.list;
 
 export const getStudentSummary = createSelector(getList, (list) => {
-  console.log("student list ", getList, " summary ", list);
-
-  let highestGrade = "--";
-  let lowestGrade = "--";
-  let summary: Record<string, string> = {};
+  let Summary = {
+    highestGrade: "--",
+    lowestGrade: "--",
+    mostPassedSubject: "--",
+    mostFailedSubject: "--",
+  };
+  let subjectSummary: Record<string, string> = {};
   list.forEach((item) => {
-    if (!summary[item.subject]) {
+    if (!subjectSummary[item.subject]) {
       if (item.grade === "F") {
-        set(summary, `${item.subject}`, {
+        set(subjectSummary, `${item.subject}`, {
           pass: 0,
           fail: 1,
         });
+        Summary.mostFailedSubject = item.subject;
       } else {
-        set(summary, `${item.subject}.pass`, 1);
-        set(summary, `${item.subject}.fail`, 0);
+        set(subjectSummary, `${item.subject}`, {
+          pass: 1,
+          fail: 0,
+        });
+        Summary.mostPassedSubject = item.subject;
       }
     } else {
       if (item.grade === "F") {
         set(
-          summary,
+          subjectSummary,
           `${item.subject}.fail`,
-          get(summary, `${item.subject}.fail`) + 1
+          get(subjectSummary, `${item.subject}.fail`) + 1
         );
+        if (
+          get(subjectSummary, `${item.subject}.fail`) >
+          get(subjectSummary, `${Summary.mostFailedSubject}.fail`)
+        )
+          Summary.mostFailedSubject = item.subject;
       } else {
         set(
-          summary,
+          subjectSummary,
           `${item.subject}.pass`,
-          get(summary, `${item.subject}.pass`) + 1
+          get(subjectSummary, `${item.subject}.pass`) + 1
         );
+        if (
+          get(subjectSummary, `${item.subject}.pass`) >
+          get(subjectSummary, `${Summary.mostPassedSubject}.pass`)
+        )
+          Summary.mostPassedSubject = item.subject;
       }
     }
 
     if (gradesPresidance.indexOf(item.grade) !== 0) {
-      if (lowestGrade === "--") lowestGrade = item.grade;
+      if (Summary.lowestGrade === "--") Summary.lowestGrade = item.grade;
       else if (
         gradesPresidance.indexOf(item.grade) <
-        gradesPresidance.indexOf(lowestGrade)
+        gradesPresidance.indexOf(Summary.lowestGrade)
       )
-        lowestGrade = item.grade;
-      if (highestGrade === "--") highestGrade = item.grade;
+        Summary.lowestGrade = item.grade;
+      if (Summary.highestGrade === "--") Summary.highestGrade = item.grade;
       else if (
         gradesPresidance.indexOf(item.grade) >
-        gradesPresidance.indexOf(highestGrade)
+        gradesPresidance.indexOf(Summary.highestGrade)
       )
-        highestGrade = item.grade;
+        Summary.highestGrade = item.grade;
     } else {
-      lowestGrade = item.grade;
+      Summary.lowestGrade = item.grade;
     }
   });
-  console.log("highest grade", highestGrade);
-  console.log("lowest grade", lowestGrade);
-  console.log("summary ", summary);
+  return Summary;
 });

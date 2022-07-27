@@ -2,6 +2,7 @@ import { MetaAction, TypeConstant } from "typesafe-actions";
 
 export interface IStudentState {
   list: IStudentRaw[];
+  summary: Record<string, string>;
 }
 export interface IStudentStateModified {
   list: IStudentRaw[];
