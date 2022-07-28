@@ -2,11 +2,12 @@ import React from "react";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./state/Configurestore";
-import StudentTableContainer from "./containers/StudentTableContainer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StudentFormContainer from "./containers/StudentFormContainer";
 import RoutingHandler from "./helpers/history";
+import StudentDashboard from "./components/studentDashboard";
+import StudentForm from "./components/StudentForm";
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <BrowserRouter>
           <RoutingHandler />
           <Routes>
-            <Route path="/" element={<StudentTableContainer />} />
-            <Route path="student" element={<StudentFormContainer />} />
+            <Route path="/" element={<StudentDashboard />} />
+            <Route path="student" element={<StudentForm />} />
             <Route
               path="student/:studentId"
               element={<StudentFormContainer />}

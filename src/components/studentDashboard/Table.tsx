@@ -1,21 +1,17 @@
 import {
-  Button,
-  Grid,
-  Table,
+  Paper,
+  Table as MuiTable,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
 } from "@mui/material";
-
-import Paper from "@mui/material/Paper";
-import React, { useEffect } from "react";
-import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
-import { specificDate } from "../helpers";
-import { colors } from "../helpers/data";
-import { navigate } from "../helpers/history";
-import ActionMenu from "./common/ActionMenu";
+import { useEffect } from "react";
+import { specificDate } from "../../helpers";
+import { colors } from "../../helpers/data";
+import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
+import ActionMenu from "../common/ActionMenu";
 
 interface IProps {
   fetchStudents: () => void;
@@ -23,28 +19,16 @@ interface IProps {
   deleteStudent: (data: IAddStudentRaw) => void;
 }
 
-function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
+function Table({ fetchStudents, list, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
 
   return (
     <div>
-      <Grid container justifyContent="flex-end">
-        <Button
-          variant="outlined"
-          sx={{ color: "#343744", mr: "100px", my: "20px" }}
-          onClick={() => {
-            navigate("/student");
-          }}
-        >
-          + Add Data
-        </Button>
-      </Grid>
-
       {list.length > 0 ? (
         <TableContainer component={Paper}>
-          <Table>
+          <MuiTable>
             <TableHead>
               <TableRow>
                 <TableCell> Name</TableCell>
@@ -75,7 +59,7 @@ function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+          </MuiTable>
         </TableContainer>
       ) : (
         <> </>
@@ -84,4 +68,4 @@ function StudentTable({ fetchStudents, list, deleteStudent }: IProps) {
   );
 }
 
-export default React.memo(StudentTable);
+export default Table;

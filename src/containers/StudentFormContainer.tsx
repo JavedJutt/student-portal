@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import StudentForm from "../components/StudentForm";
-
+import Form from "../components/StudentForm/Form";
 import { IApplicationState } from "../state/ducks";
 import {
   addStudent,
@@ -36,7 +35,7 @@ function StudentFormContainer() {
     ),
   };
 
-  return <StudentForm {...dispatchToProps} {...stateToProps} />;
+  return <Form {...dispatchToProps} {...stateToProps} />;
 }
 
 export default StudentFormContainer;
