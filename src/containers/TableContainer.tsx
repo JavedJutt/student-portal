@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Table from "../components/studentDashboard/Table";
 import { IApplicationState } from "../state/ducks";
 import { deleteStudent, fetchStudents } from "../state/ducks/student/actions";
-import { getStudentSummary } from "../state/ducks/student/selector";
 import { IAddStudentRaw, IStudentState } from "../state/ducks/student/types";
 
 const TableContainer = () => {

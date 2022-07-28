@@ -2,14 +2,14 @@ import { Button, Container, Grid } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import SelectField from "./common/fields/SelectField";
-import InputField from "./common/fields/InputField";
+import SelectField from "../common/fields/SelectField";
+import InputField from "../common/fields/InputField";
 
-import { formDefaultValues, grades, subjects } from "../helpers/data";
-import { IAddStudentRaw, IStudentRaw } from "../state/ducks/student/types";
+import { formDefaultValues, grades, subjects } from "../../helpers/data";
+import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 import { useCallback, useEffect, useMemo } from "react";
-import { navigate } from "../helpers/history";
-import { addStudentSchema } from "../helpers/schemas";
+import { navigate } from "../../helpers/history";
+import { addStudentSchema } from "../../helpers/schemas";
 
 interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
@@ -19,7 +19,7 @@ interface IProps {
   editStudent: (data: IAddStudentRaw) => void;
 }
 
-function StudentForm({
+function Form({
   addStudent,
   list,
   fetchSpecificStudent,
@@ -143,4 +143,4 @@ function StudentForm({
   );
 }
 
-export default StudentForm;
+export default Form;
