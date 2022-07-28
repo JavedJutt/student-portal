@@ -1,17 +1,16 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import StudentTable from "../components/StudentTable";
+import Table from "../components/studentDashboard/Table";
 import { IApplicationState } from "../state/ducks";
 import { deleteStudent, fetchStudents } from "../state/ducks/student/actions";
 import { getStudentSummary } from "../state/ducks/student/selector";
 import { IAddStudentRaw, IStudentState } from "../state/ducks/student/types";
 
-const StudentTableContainer = () => {
+const TableContainer = () => {
   const dispatch = useDispatch();
   const stateToProps: IStudentState = useSelector(
     ({ student }: IApplicationState) => ({
       list: student.list,
-      summary: getStudentSummary({ student }),
     })
   );
 
@@ -23,7 +22,7 @@ const StudentTableContainer = () => {
     ),
   };
 
-  return <StudentTable {...stateToProps} {...dispatchToProps} />;
+  return <Table {...stateToProps} {...dispatchToProps} />;
 };
 
-export default StudentTableContainer;
+export default TableContainer;

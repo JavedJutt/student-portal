@@ -2,11 +2,11 @@ import { Box } from "@mui/material";
 import React from "react";
 interface IProps {
   title: string;
-  summary: string;
+  summaryResult: string;
   isGreen: boolean;
 }
 
-function SummaryBox({ title, summary, isGreen }: IProps) {
+function SummaryBox({ title, isGreen, summaryResult }: IProps) {
   return (
     <>
       <Box
@@ -22,7 +22,7 @@ function SummaryBox({ title, summary, isGreen }: IProps) {
         }}
       >
         <h4>{title}</h4>
-        <h3>{summary}</h3>
+        <h3>{summaryResult}</h3>
       </Box>
     </>
   );
