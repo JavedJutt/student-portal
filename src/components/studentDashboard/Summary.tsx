@@ -1,41 +1,44 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { useTheme } from "@mui/material/styles";
+import { Grid } from "@mui/material";
 import SummaryBox from "../common/SummaryBox";
 
-function Summary(summaryResult: Record<string, string>) {
+function Summary({ summaryResult }: any) {
+  const theme = useTheme();
   return (
-    <>
-      <Box
-        sx={{
-          my: 4,
-          height: 100,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-        }}
-      >
+    <Grid container direction="row" my={"20px"}>
+      <Grid item md={3} sm={6}>
         <SummaryBox
           title="Top Grade"
           summaryResult={summaryResult.highestGrade}
-          isGreen={true}
+          fontFamily={theme.typography.fontFamily}
+          bgcolor={theme.palette.primary.main}
         />
+      </Grid>
+      <Grid item md={3} sm={6}>
         <SummaryBox
           title="Most Passed"
           summaryResult={summaryResult.mostPassedSubject}
-          isGreen={true}
+          fontFamily={theme.typography.fontFamily}
+          bgcolor={theme.palette.primary.main}
         />
+      </Grid>
+      <Grid item md={3} sm={6}>
         <SummaryBox
           title="Lowest Grade"
           summaryResult={summaryResult.lowestGrade}
-          isGreen={false}
+          fontFamily={theme.typography.fontFamily}
+          bgcolor={theme.palette.secondary.main}
         />
+      </Grid>
+      <Grid item md={3} sm={6}>
         <SummaryBox
           title="Most Failed"
           summaryResult={summaryResult.mostFailedSubject}
-          isGreen={false}
+          fontFamily={theme.typography.fontFamily}
+          bgcolor={theme.palette.secondary.main}
         />
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 

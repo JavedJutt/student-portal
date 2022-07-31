@@ -40,7 +40,12 @@ function ActionMenu({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <MoreVertIcon key={index} />
+        <MoreVertIcon
+          key={index}
+          sx={{
+            color: "#757B81",
+          }}
+        />
       </Button>
 
       <Menu
@@ -49,6 +54,7 @@ function ActionMenu({
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
+        color={"black"}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "top",

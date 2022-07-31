@@ -3,21 +3,23 @@ import React from "react";
 interface IProps {
   title: string;
   summaryResult: string;
-  isGreen: boolean;
+  bgcolor: string | any;
+  fontFamily: string | undefined;
 }
 
-function SummaryBox({ title, isGreen, summaryResult }: IProps) {
+function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
   return (
     <>
       <Box
         component="div"
         sx={{
-          display: "inline",
-          height: 99,
-          width: 146,
+          height: "99px",
+          width: "150px",
+          p: "1px",
           borderRadius: "6px",
           color: "white",
-          bgcolor: isGreen ? "#4AAA9A" : "#FF6897",
+          bgcolor,
+          fontFamily,
           textAlign: "center",
         }}
       >

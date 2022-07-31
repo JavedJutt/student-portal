@@ -1,5 +1,4 @@
 import {
-  Paper,
   Table as MuiTable,
   TableBody,
   TableCell,
@@ -7,11 +6,15 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import { useEffect } from "react";
-import { specificDate } from "../../helpers";
-import { colors } from "../../helpers/data";
+import { datePart1, datePart2 } from "../../helpers";
+import { BgColors, colors } from "../../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 import ActionMenu from "../common/ActionMenu";
+import DateCell from "./DateCell";
+import GradeCell from "./GradeCell";
+import { tableText, textModified } from "./styles";
 
 interface IProps {
   fetchStudents: () => void;
@@ -23,19 +26,19 @@ function Table({ fetchStudents, list, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-
+  console.log(list);
   return (
     <div>
       {list.length > 0 ? (
-        <TableContainer component={Paper}>
+        <TableContainer>
           <MuiTable>
             <TableHead>
               <TableRow>
-                <TableCell> Name</TableCell>
-                <TableCell> Marks</TableCell>
-                <TableCell> Subject</TableCell>
-                <TableCell> Grade</TableCell>
-                <TableCell> Date</TableCell>
+                <TableCell sx={tableText}> Name</TableCell>
+                <TableCell sx={tableText}> Marks</TableCell>
+                <TableCell sx={tableText}> Subject</TableCell>
+                <TableCell sx={{ ...tableText, pl: 5 }}> Grade</TableCell>
+                <TableCell sx={tableText}> Date</TableCell>
                 <TableCell> Action</TableCell>
               </TableRow>
             </TableHead>
@@ -45,10 +48,12 @@ function Table({ fetchStudents, list, deleteStudent }: IProps) {
                   <TableCell>{student.name} </TableCell>
                   <TableCell>{student.marks} </TableCell>
                   <TableCell>{student.subject} </TableCell>
-                  <TableCell sx={{ bgcolor: colors[student.grade] }}>
-                    {student.grade}
+                  <TableCell>
+                    <GradeCell grade={student.grade} />
                   </TableCell>
-                  <TableCell>{specificDate(student.time)} </TableCell>
+                  <TableCell>
+                    <DateCell time={student.time} />
+                  </TableCell>
                   <TableCell>
                     <ActionMenu
                       item={student}

@@ -1,8 +1,15 @@
-export const colors: Record<string, string> = {
+export const BgColors: Record<string, string> = {
   "A+": "#686563",
   "A-": "#686563",
   "B+": "#FFF7F5",
   "B-": "#FFF7F5",
+  F: "rgba(255, 104, 151, 0.5);",
+};
+export const colors: Record<string, string> = {
+  "A+": "#C0C0C0",
+  "A-": "#C0C0C0",
+  "B+": "#FFB59D",
+  "B-": "#FFB59D",
   F: "#FF6897",
 };
 

@@ -1,23 +1,26 @@
-import { Button, Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import React from "react";
 import { navigate } from "../../helpers/history";
+import { addDatabtn, heading } from "./styles";
 
 function Header() {
   return (
     <>
-      <Grid sx={{ display: "inline", justifyContent: "flex-start" }}>
-        <h1> Student Summary </h1>
-      </Grid>
-      <Grid sx={{ display: "inline", justifyContent: "flex-end" }}>
-        <Button
-          variant="outlined"
-          sx={{ color: "#343744", mr: "100px", mt: "20px" }}
-          onClick={() => {
-            navigate("/student");
-          }}
-        >
-          + Add Data
-        </Button>
+      <Grid container direction="row" justifyContent="space-between">
+        <Grid item sx={heading}>
+          Student Summary
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            sx={addDatabtn}
+            onClick={() => {
+              navigate("/student");
+            }}
+          >
+            + Add Data
+          </Button>
+        </Grid>
       </Grid>
     </>
   );
