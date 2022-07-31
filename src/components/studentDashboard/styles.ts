@@ -26,3 +26,7 @@ export const textModified = {
   color: "#798BA3",
   pt: "4px",
 };
+
+export const hoverStyling = {
+  "&:hover": { bgcolor: "#F1F2F6", borderRadius: "6px" },
+};
