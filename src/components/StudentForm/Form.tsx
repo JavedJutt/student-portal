@@ -1,4 +1,4 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Input, InputAdornment } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -72,7 +72,7 @@ function Form({
             <InputField
               label="Name"
               type="text"
-              error={formState.errors.name?.message}
+              errorMessage={formState.errors.name?.message}
               placeholder="Enter name"
               {...restField}
             />
@@ -86,7 +86,7 @@ function Form({
             <InputField
               label="Marks"
               type="number"
-              error={formState.errors.marks?.message}
+              errorMessage={formState.errors.marks?.message}
               placeholder="Enter marks"
               {...restField}
             />

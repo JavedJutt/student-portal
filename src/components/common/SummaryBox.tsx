@@ -14,7 +14,7 @@ function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
         component="div"
         sx={{
           height: "99px",
-          maxWidth: "146px",
+          // maxWidth: "146px",
           p: "1px",
           borderRadius: "6px",
           color: "white",
