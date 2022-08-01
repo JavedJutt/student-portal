@@ -6,7 +6,7 @@ function Summary({ summaryResult }: any) {
   const theme = useTheme();
   return (
     <Grid container direction="row" my={"20px"} justifyContent="space-between">
-      <Grid item md={2} xs={6}>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Top Grade"
           summaryResult={summaryResult.highestGrade}
@@ -14,7 +14,7 @@ function Summary({ summaryResult }: any) {
           bgcolor={theme.palette.primary.main}
         />
       </Grid>
-      <Grid item md={2} xs={6}>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Most Passed"
           summaryResult={summaryResult.mostPassedSubject}
@@ -22,7 +22,7 @@ function Summary({ summaryResult }: any) {
           bgcolor={theme.palette.primary.main}
         />
       </Grid>
-      <Grid item md={2} xs={6}>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Lowest Grade"
           summaryResult={summaryResult.lowestGrade}
@@ -30,7 +30,7 @@ function Summary({ summaryResult }: any) {
           bgcolor={theme.palette.secondary.main}
         />
       </Grid>
-      <Grid item md={2} xs={6}>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Most Failed"
           summaryResult={summaryResult.mostFailedSubject}

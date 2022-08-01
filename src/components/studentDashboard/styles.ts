@@ -6,6 +6,7 @@ export const addDatabtn = {
   color: "#343744",
   width: "133px",
   height: "44px",
+  fontWeight: "600",
   mt: "20px",
   textTransform: "none",
   border: 1,

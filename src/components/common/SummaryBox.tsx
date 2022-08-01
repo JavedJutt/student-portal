@@ -13,9 +13,7 @@ function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
       <Box
         component="div"
         sx={{
-          height: "99px",
-          // maxWidth: "146px",
-          p: "1px",
+          py: "1px",
           borderRadius: "6px",
           color: "white",
           bgcolor,
@@ -23,8 +21,8 @@ function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
           textAlign: "center",
         }}
       >
-        <h4>{title}</h4>
-        <h3>{summaryResult}</h3>
+        <p>{title}</p>
+        <p>{summaryResult}</p>
       </Box>
     </>
   );

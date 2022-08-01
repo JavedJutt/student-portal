@@ -6,15 +6,14 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Box } from "@mui/system";
+
 import { useEffect } from "react";
-import { datePart1, datePart2 } from "../../helpers";
-import { BgColors, colors } from "../../helpers/data";
+
 import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 import ActionMenu from "../common/ActionMenu";
 import DateCell from "./DateCell";
 import GradeCell from "./GradeCell";
-import { tableText, textModified } from "./styles";
+import { tableText } from "./styles";
 
 interface IProps {
   fetchStudents: () => void;
@@ -26,7 +25,6 @@ function Table({ fetchStudents, list, deleteStudent }: IProps) {
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-  console.log(list);
   return (
     <div>
       {list.length > 0 ? (
