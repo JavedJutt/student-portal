@@ -23,3 +23,8 @@ export const formDefaultValues = {
   subject: "Math",
   grade: "F",
 };
+
+export enum specificColors {
+  moreVertIconColor = "#757B81",
+  deleteIconColor = "#A4B4CB",
+}

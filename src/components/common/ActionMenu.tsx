@@ -6,6 +6,7 @@ import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { hoverStyling } from "../studentDashboard/styles";
+import { specificColors } from "../../helpers/data";
 
 function ActionMenu({
   item,
@@ -46,7 +47,7 @@ function ActionMenu({
         <MoreVertIcon
           key={index}
           sx={{
-            color: "#757B81",
+            color: specificColors.moreVertIconColor,
           }}
         />
       </Button>
@@ -59,7 +60,7 @@ function ActionMenu({
         open={open}
         color={"black"}
         onClose={handleClose}
-        sx={{ pt: "0.3em", pb: "0.3em" }}
+        sx={{ py: "0.3em" }}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
@@ -73,7 +74,6 @@ function ActionMenu({
           onClick={() => handleCloseEdit(item._id)}
           sx={{ ...hoverStyling }}
         >
-          {" "}
           <EditIcon sx={{ color: "#A4B4CB" }} />
           &nbsp;&nbsp;Edit
         </MenuItem>
@@ -81,8 +81,8 @@ function ActionMenu({
           onClick={() => handleCloseDelete(item)}
           sx={{ pb: 0, mb: 0, ...hoverStyling }}
         >
-          {" "}
-          <DeleteIcon sx={{ color: "#A4B4CB" }} /> &nbsp;&nbsp;Delete
+          <DeleteIcon sx={{ color: specificColors.deleteIconColor }} />{" "}
+          &nbsp;&nbsp;Delete
         </MenuItem>
       </Menu>
     </>
