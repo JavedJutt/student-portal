@@ -1,15 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 interface IProps {
   title: string;
   summaryResult: string;
-  bgcolor: string | any;
-  fontFamily: string | undefined;
+  bgcolor?: string | any;
 }
-var theme;
-function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
-  const _theme = useTheme();
-  theme = _theme;
+
+function SummaryBox({ title, bgcolor, summaryResult }: IProps) {
   return (
     <>
       <Box
@@ -19,7 +15,6 @@ function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
           borderRadius: "6px",
           color: "white",
           bgcolor,
-          fontFamily,
           textAlign: "center",
         }}
       >
@@ -38,9 +33,5 @@ function SummaryBox({ title, bgcolor, summaryResult, fontFamily }: IProps) {
     </>
   );
 }
-
-SummaryBox.defaultProps = {
-  fontFamily: theme.typography.fontFamily,
-};
 
 export default SummaryBox;

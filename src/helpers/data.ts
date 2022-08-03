@@ -3,7 +3,7 @@ export const BgColors: Record<string, string> = {
   "A-": "#686563",
   "B+": "#FFF7F5",
   "B-": "#FFF7F5",
-  F: "rgba(255, 104, 151, 0.5);",
+  F: "#ff689780",
 };
 export const colors: Record<string, string> = {
   "A+": "#C0C0C0",

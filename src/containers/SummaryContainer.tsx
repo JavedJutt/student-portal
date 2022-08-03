@@ -10,6 +10,7 @@ function SummaryContainer() {
       summaryResult: getStudentSummary({ student }),
     })
   );
+
   return <Summary {...stateToProps} />;
 }
 

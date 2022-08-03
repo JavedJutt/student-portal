@@ -10,7 +10,6 @@ function Summary({ summaryResult }: any) {
         <SummaryBox
           title="Top Grade"
           summaryResult={summaryResult.highestGrade}
-          fontFamily={theme.typography.fontFamily}
           bgcolor={theme.palette.primary.main}
         />
       </Grid>
@@ -18,7 +17,6 @@ function Summary({ summaryResult }: any) {
         <SummaryBox
           title="Most Passed"
           summaryResult={summaryResult.mostPassedSubject}
-          fontFamily={theme.typography.fontFamily}
           bgcolor={theme.palette.primary.main}
         />
       </Grid>
@@ -26,7 +24,6 @@ function Summary({ summaryResult }: any) {
         <SummaryBox
           title="Lowest Grade"
           summaryResult={summaryResult.lowestGrade}
-          fontFamily={theme.typography.fontFamily}
           bgcolor={theme.palette.secondary.main}
         />
       </Grid>
@@ -34,7 +31,6 @@ function Summary({ summaryResult }: any) {
         <SummaryBox
           title="Most Failed"
           summaryResult={summaryResult.mostFailedSubject}
-          fontFamily={theme.typography.fontFamily}
           bgcolor={theme.palette.secondary.main}
         />
       </Grid>
