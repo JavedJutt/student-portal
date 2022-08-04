@@ -3,6 +3,10 @@ import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { navigate } from "../../helpers/history";
 import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { hoverStyling } from "../studentDashboard/styles";
+import { specificColors } from "../../helpers/data";
 
 function ActionMenu({
   item,
@@ -40,7 +44,12 @@ function ActionMenu({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <MoreVertIcon key={index} />
+        <MoreVertIcon
+          key={index}
+          sx={{
+            color: specificColors.moreVertIconColor,
+          }}
+        />
       </Button>
 
       <Menu
@@ -49,7 +58,9 @@ function ActionMenu({
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
+        color={"black"}
         onClose={handleClose}
+        sx={{ py: "0.3em" }}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
@@ -59,8 +70,20 @@ function ActionMenu({
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={() => handleCloseEdit(item._id)}>Edit</MenuItem>
-        <MenuItem onClick={() => handleCloseDelete(item)}>Delete</MenuItem>
+        <MenuItem
+          onClick={() => handleCloseEdit(item._id)}
+          sx={{ ...hoverStyling }}
+        >
+          <EditIcon sx={{ color: "#A4B4CB" }} />
+          &nbsp;&nbsp;Edit
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleCloseDelete(item)}
+          sx={{ pb: 0, mb: 0, ...hoverStyling }}
+        >
+          <DeleteIcon sx={{ color: specificColors.deleteIconColor }} />{" "}
+          &nbsp;&nbsp;Delete
+        </MenuItem>
       </Menu>
     </>
   );

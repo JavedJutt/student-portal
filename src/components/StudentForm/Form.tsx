@@ -1,15 +1,16 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import SelectField from "../common/fields/SelectField";
 import InputField from "../common/fields/InputField";
-
+import { useTheme } from "@mui/material/styles";
 import { formDefaultValues, grades, subjects } from "../../helpers/data";
 import { IAddStudentRaw, IStudentRaw } from "../../state/ducks/student/types";
 import { useCallback, useEffect, useMemo } from "react";
 import { navigate } from "../../helpers/history";
 import { addStudentSchema } from "../../helpers/schemas";
+import { cancelBtnStyle, saveBtnStyle } from "./styles";
 
 interface IProps {
   addStudent: (data: IAddStudentRaw) => void;
@@ -27,7 +28,7 @@ function Form({
   editStudent,
 }: IProps) {
   let { studentId } = useParams();
-
+  const theme = useTheme();
   const isEditMode = useMemo(
     () => !!studentId && !!specificStudent.payload,
     [specificStudent, studentId]
@@ -63,7 +64,13 @@ function Form({
   return (
     <Container maxWidth="xs">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>{studentId ? "Edit Student Data" : "Add Student data"}</h1>
+        <Typography
+          variant="h5"
+          component="div"
+          sx={{ textAlign: "center", my: 4 }}
+        >
+          {studentId ? "Edit Student Data" : "Add Student data"}
+        </Typography>
 
         <Controller
           name="name"
@@ -72,7 +79,7 @@ function Form({
             <InputField
               label="Name"
               type="text"
-              error={formState.errors.name?.message}
+              errorMessage={formState.errors.name?.message}
               placeholder="Enter name"
               {...restField}
             />
@@ -86,7 +93,7 @@ function Form({
             <InputField
               label="Marks"
               type="number"
-              error={formState.errors.marks?.message}
+              errorMessage={formState.errors.marks?.message}
               placeholder="Enter marks"
               {...restField}
             />
@@ -127,15 +134,19 @@ function Form({
         >
           <Button
             variant="outlined"
+            sx={cancelBtnStyle}
             onClick={() => {
               handleCancleClick();
             }}
           >
-            {" "}
-            cancel
+            Cancel
           </Button>
-          <Button variant="outlined" type="submit">
-            save
+          <Button
+            variant="outlined"
+            type="submit"
+            sx={{ bgcolor: theme.palette.primary.main, ...saveBtnStyle }}
+          >
+            {studentId ? " Edit " : " Add "}
           </Button>
         </Grid>
       </form>

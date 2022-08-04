@@ -1,28 +1,34 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material";
 interface IProps {
   title: string;
   summaryResult: string;
-  isGreen: boolean;
+  bgcolor?: string | any;
 }
 
-function SummaryBox({ title, isGreen, summaryResult }: IProps) {
+function SummaryBox({ title, bgcolor, summaryResult }: IProps) {
   return (
     <>
       <Box
         component="div"
         sx={{
-          display: "inline",
-          height: 99,
-          width: 146,
+          py: "8px",
           borderRadius: "6px",
           color: "white",
-          bgcolor: isGreen ? "#4AAA9A" : "#FF6897",
+          bgcolor,
           textAlign: "center",
         }}
       >
-        <h4>{title}</h4>
-        <h3>{summaryResult}</h3>
+        <Typography variant="subtitle1" gutterBottom component="div">
+          {title}
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+          component="div"
+          sx={{ mt: "10px" }}
+        >
+          {summaryResult}
+        </Typography>
       </Box>
     </>
   );

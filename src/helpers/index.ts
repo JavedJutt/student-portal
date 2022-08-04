@@ -1,4 +1,8 @@
 import moment from "moment";
 
-export const specificDate = (time: string) =>
-  moment(time).format("MMM D, YYYY [at] hh.mm A");
+export const formateDateTime = (time: string) => {
+  return {
+    date: moment(time).format("MMM D, YYYY"),
+    time: moment(time).format("hh.mm A"),
+  };
+};

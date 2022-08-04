@@ -1,41 +1,40 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { useTheme } from "@mui/material/styles";
+import { Grid } from "@mui/material";
 import SummaryBox from "../common/SummaryBox";
 
-function Summary(summaryResult: Record<string, string>) {
+function Summary({ summaryResult }: any) {
+  const theme = useTheme();
   return (
-    <>
-      <Box
-        sx={{
-          my: 4,
-          height: 100,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-        }}
-      >
+    <Grid container direction="row" my={"20px"} justifyContent="space-between">
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Top Grade"
           summaryResult={summaryResult.highestGrade}
-          isGreen={true}
+          bgcolor={theme.palette.primary.main}
         />
+      </Grid>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Most Passed"
           summaryResult={summaryResult.mostPassedSubject}
-          isGreen={true}
+          bgcolor={theme.palette.primary.main}
         />
+      </Grid>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Lowest Grade"
           summaryResult={summaryResult.lowestGrade}
-          isGreen={false}
+          bgcolor={theme.palette.secondary.main}
         />
+      </Grid>
+      <Grid item md={1.5} xs={5}>
         <SummaryBox
           title="Most Failed"
           summaryResult={summaryResult.mostFailedSubject}
-          isGreen={false}
+          bgcolor={theme.palette.secondary.main}
         />
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 
