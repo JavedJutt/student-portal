@@ -2,11 +2,12 @@ import { createSelector } from "reselect";
 import { IApplicationState } from "..";
 import { get, set } from "lodash";
 import { gradesPresidance } from "../../../helpers/data";
+import { ISummary } from "./types";
 
 const getList = (state: IApplicationState) => state.student.list;
 
 export const getStudentSummary = createSelector(getList, (list) => {
-  const summary = {
+  const summary: ISummary = {
     highestGrade: "--",
     lowestGrade: "--",
     mostPassedSubject: "--",

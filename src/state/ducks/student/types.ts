@@ -50,3 +50,10 @@ export interface IDispatchToProps {
 export interface IDispatchToPropsAddStudent {
   addStudent: (data: IAddStudentRaw) => IAddMetaAction;
 }
+
+export interface ISummary {
+  highestGrade: string;
+  lowestGrade: string;
+  mostPassedSubject: string;
+  mostFailedSubject: string;
+}

@@ -1,8 +1,9 @@
 import { useTheme } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import SummaryBox from "../common/SummaryBox";
+import { ISummary } from "../../state/ducks/student/types";
 
-function Summary({ summaryResult }: any) {
+function Summary({ summaryResult }: { summaryResult: ISummary }) {
   const theme = useTheme();
   return (
     <Grid container direction="row" my={"20px"} justifyContent="space-between">
